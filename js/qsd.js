@@ -10,7 +10,7 @@
 	  $scope.getPosts = function() {
 	  	var Post = AV.Object.extend("Post");
 	  	var query = new AV.Query(Post);
-	  	query.limit(10);
+	  	query.limit(20);
 	  	query.descending("time");
 	  	query.find({
 	  		success:function (results){
