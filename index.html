@@ -43,7 +43,7 @@
 </style>
 <![endif]-->
 </head>
-<body style=""  ng-app="postMod"><iframe frameborder="0" style="display: none;"></iframe>
+<body style=""  ng-app="postsMod"><iframe frameborder="0" style="display: none;"></iframe>
 <!--header-->
 <header class="indexHead">
 <div class="headerWrap">
@@ -200,13 +200,14 @@
 		<!-- leftWrapTop end-->
 		
 						<!-- list -->
-        	<ul ng-controller="postCtrl">
+        	<ul ng-controller="postsCtrl">
 			<li ng-repeat="post in posts">
                     		<div class="list " articleid="" timesort="">
 			<div class="listTitle">
 								<a href="" class="icon">{{post.doc_type}}</a>
 								<h4 class="itemName">
-                    <a onclick="" href="{{post.url}}" target="_blank" ng-click=updatePostClick(post) >
+                    <!--<a onclick="" href="{{post.url}}" target="_blank" ng-click=updatePostClick(post) >-->
+					<a onclick="" href="post.html?id={{post.objectId}}" target="_blank" ng-click=updatePostClick(post) >
 
                         {{post.title}}                      
 
@@ -214,14 +215,14 @@
                     </a></h4>
 				<div class="clear"></div>
 			</div>
-            <a ng-click=updatePostClick(post) href="{{post.url}}" target="_blank" class="picLeft" title="">
+            <a ng-click=updatePostClick(post) href="post.html?id={{post.objectId}}" target="_blank" class="picLeft" title="">
                 <img src="{{post.pic_left.url}}?imageView2/1/w/190/h/190" height="190px" width="190px" style="margin-top:0px" alt="{{post.title}}">
             </a>
 			<div class="listRight">
 				<div class="lrTop">
 					<span class="lrTime">{{post.time.iso}}</span>
 															<span>
-						标签：                                                            <a href="{{post.url}}">
+						标签：                                                            <a href="post.html?id={{post.objectId}}">
                                     {{post.tag}}                                </a>
                                             															</span>
 									</div>
@@ -236,7 +237,7 @@
 						<span class="scoreTotal"><b>踩</b> <em>{{post.bad}}</em></span>
 						<span class="scoredInfo">已打分</span>
 						<span class="scoreAnimate">+1</span>					</a>
-					<a href="{{post.url}}#comments" class="comment" title="评论" target="_blank"><i class="icon-comment"><!--[if lt IE 8]>评论<![endif]--></i><em></em></a>
+					<a href="{post.html?id={{post.objectId}}#comments" class="comment" title="评论" target="_blank"><i class="icon-comment"><!--[if lt IE 8]>评论<![endif]--></i><em></em></a>
 										<div class="botPart" id="buybutton"  ng-if=post.doc_type=="buy">
                         						<div class="buy" style="z-index: 2;" >
                                                             <a href="{{post.buy_url}}" target="_blank" ng-click=updatePostClick(post) rel="nofollow" onclick="">直达链接<i>&gt;</i></a>
@@ -323,7 +324,7 @@
 		<!-- rightPanel end-->
                 
 		<!-- rightPanel-->
-		<div class="rightPanel" ng-controller="postCtrl" >	
+		<div class="rightPanel" ng-controller="postsCtrl" >	
     <h2 class="panelTitle">今日最热</h2>
 
     <ul class="rightHotNews">
@@ -331,35 +332,35 @@
             <li class="listCurrent">
                     <a href="{{hotPosts[0].url}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[0]) onclick=""><img src="{{hotPosts[0].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[0].title}}"  height="78" width="78"  /></a>
                     <div class="listInfo">
-                        <div class="itemName"><a href="{{hotPosts[0].url}}"  ng-click=updatePostClick(hotPosts[0]) target="_blank" onclick="">{{hotPosts[0].title}}</a></div>
+                        <div class="itemName"><a href="post.html?id={{hotPosts[0].objectId}}"  ng-click=updatePostClick(hotPosts[0]) target="_blank" onclick="">{{hotPosts[0].title}}</a></div>
                         <div class="listBot"><span ”><i>赞</i>{{hotPosts[0].good}}</span><span><i>热度</i>{{hotPosts[0].click}}</span></div>
                     </div>
           </li>
           <li class="listItem">
                     <a href="{{hotPosts[1].url}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[1]) onclick=""><img src="{{hotPosts[1].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[1].title}}"  height="78" width="78"  /></a>
                     <div class="listInfo">
-                        <div class="itemName"><a href="{{hotPosts[1].url}}"  ng-click=updatePostClick(hotPosts[1]) target="_blank" onclick="">{{hotPosts[1].title}}</a></div>
+                        <div class="itemName"><a href="post.html?id={{hotPosts[1].objectId}}"  ng-click=updatePostClick(hotPosts[1]) target="_blank" onclick="">{{hotPosts[1].title}}</a></div>
                         <div class="listBot"><span ”><i>赞</i>{{hotPosts[1].good}}</span><span><i>热度</i>{{hotPosts[1].click}}</span></div>
                     </div>
           </li>
           <li class="listItem">
                     <a href="{{hotPosts[2].url}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[2]) onclick=""><img src="{{hotPosts[2].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[2].title}}"  height="78" width="78"  /></a>
                     <div class="listInfo">
-                        <div class="itemName"><a href="{{hotPosts[2].url}}"  ng-click=updatePostClick(hotPosts[2]) target="_blank" onclick="">{{hotPosts[2].title}}</a></div>
+                        <div class="itemName"><a href="post.html?id={{hotPosts[2].objectId}}"  ng-click=updatePostClick(hotPosts[2]) target="_blank" onclick="">{{hotPosts[2].title}}</a></div>
                         <div class="listBot"><span ”><i>赞</i>{{hotPosts[2].good}}</span><span><i>热度</i>{{hotPosts[2].click}}</span></div>
                     </div>
           </li>
           <li class="listItem">
                     <a href="{{hotPosts[3].url}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[3]) onclick=""><img src="{{hotPosts[3].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[3].title}}"  height="78" width="78"  /></a>
                     <div class="listInfo">
-                        <div class="itemName"><a href="{{hotPosts[3].url}}"  ng-click=updatePostClick(hotPosts[3]) target="_blank" onclick="">{{hotPosts[3].title}}</a></div>
+                        <div class="itemName"><a href="post.html?id={{hotPosts[3].objectId}}"  ng-click=updatePostClick(hotPosts[3]) target="_blank" onclick="">{{hotPosts[3].title}}</a></div>
                         <div class="listBot"><span ”><i>赞</i>{{hotPosts[3].good}}</span><span><i>热度</i>{{hotPosts[3].click}}</span></div>
                     </div>
           </li>
           <li class="listItem">
                     <a href="{{hotPosts[4].url}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[4]) onclick=""><img src="{{hotPosts[4].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[4].title}}"  height="78" width="78"  /></a>
                     <div class="listInfo">
-                        <div class="itemName"><a href="{{hotPosts[4].url}}"  ng-click=updatePostClick(hotPosts[4]) target="_blank" onclick="">{{hotPosts[4].title}}</a></div>
+                        <div class="itemName"><a href="post.html?id={{hotPosts[4].objectId}}"  ng-click=updatePostClick(hotPosts[4]) target="_blank" onclick="">{{hotPosts[4].title}}</a></div>
                         <div class="listBot"><span ”><i>赞</i>{{hotPosts[4].good}}</span><span><i>热度</i>{{hotPosts[4].click}}</span></div>
                     </div>
           </li>
@@ -367,7 +368,7 @@
           <li class="listItem">
                     <a href="{{hotPosts[5].url}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[5]) onclick=""><img src="{{hotPosts[5].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[5].title}}"  height="78" width="78"  /></a>
                     <div class="listInfo">
-                        <div class="itemName"><a href="{{hotPosts[5].url}}"  ng-click=updatePostClick(hotPosts[5]) target="_blank" onclick="">{{hotPosts[5].title}}</a></div>
+                        <div class="itemName"><a href="post.html?id={{hotPosts[5].objectId}}"  ng-click=updatePostClick(hotPosts[5]) target="_blank" onclick="">{{hotPosts[5].title}}</a></div>
                         <div class="listBot"><span ”><i>赞</i>{{hotPosts[5].good}}</span><span><i>热度</i>{{hotPosts[5].click}}</span></div>
                     </div>
           </li>
@@ -500,46 +501,7 @@
 	
 </div>
 <!-- pop login end -->
-<!-- pop collect-->
-<div class="pop pop_no_title" id="pop-collect">
-	<i class="pop-close icon-cross-lighter"><!--[if lt IE 8]>x<![endif]--></i>
-	<!-- pop-content -->		
-	<div class="pop-content twoLine">
-		<i class="icon-loginright"><!--[if lt IE 8]>√<![endif]--></i>
-        <p class="pop_info_show">已收藏<br><a href="http://www.qiongsandai.com/user/collection" class="a_small a_underline" target="_blank">去我的收藏夹 <span class="arrow">&gt;</span></a></p>
-	</div>
-	<!-- pop-content end -->		
-</div>
-<!-- pop collect end -->
-<!-- pop nocollect-->
-<div class="pop pop_no_title" id="pop-nocollect">
-	<i class="pop-close icon-cross-lighter"><!--[if lt IE 8]>x<![endif]--></i>
-	<!-- pop-content -->		
-	<div class="pop-content twoLine">
-		<i class="icon-loginright"><!--[if lt IE 8]>√<![endif]--></i>
-        <p class="pop_info_show">已取消收藏<br><a href="http://www.qiongsandai.com/user/collection" class="a_small a_underline" target="_blank">去我的收藏夹 <span class="arrow">&gt;</span></a></p>
-	</div>
-	<!-- pop-content end -->		
-</div>
-<!-- pop nocollect end -->
-<!-- pop -->
-<div class="pop pop_no_title" id="pop-closed">
-	<i class="pop-close icon-cross-lighter"><!--[if lt IE 8]>x<![endif]--></i>
-	<!-- pop-content -->		
-	<div class="pop-content twoLine">
-		<i class="icon-logintanhao"><!--[if lt IE 8]>404<![endif]--></i>
-		<p class="pop_info"></p>
-	</div>
-	<!-- pop-content end -->		
-</div>
-<div id="cover"></div>
-<!-- pop end -->
-<!--双11蒙层-->
-<!--黑五蒙层-->
-<!--618蒙层-->
 
-
-<!--630蒙层-->
 
 
 </body></html>
