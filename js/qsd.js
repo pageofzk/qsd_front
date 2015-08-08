@@ -175,7 +175,25 @@
 	  	})
 	  }
 	  
+	  $scope.updatePostClick = function(postParam) {
+	  	var Post = AV.Object.extend("Post");
+	  	var query = new AV.Query(Post);
+	  	// 可以先查询出要修改的那条存储
+
+			// 这个 id 是要修改条目的 objectId，你在生成这个实例并成功保存时可以获取到，请看前面的文档
+			query.get(postParam.objectId, {
+    			success: function(post) {
+      		// 成功，回调中可以取得这个 Post 对象的一个实例，然后就可以修改它了
+      		post.increment('click');
+      		post.save();
+    			},
+    			error: function(object, error) {
+      		// 失败了.
+      		console.log(object);
+    			}
+	  	});
+	  }
     $scope.getPost(paramMap.get('id'));
-	$scope.gethotPosts();
+		$scope.gethotPosts();
 	}]);
 })();
