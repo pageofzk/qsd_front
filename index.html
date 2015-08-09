@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="./css/icon_notIE.css" type="text/css">
  <!--<![endif]-->
 <link rel="stylesheet" href="./css/main.css" type="text/css"> 
-<link rel="stylesheet" href="./css/newIndex.css" type="text/css"> <script type="text/javascript" src="./js/jquery-1.11.0.min.js"></script>
+<link rel="stylesheet" href="./css/newindex.css" type="text/css"> <script type="text/javascript" src="./js/jquery-1.11.0.min.js"></script>
 
 <script type="text/javascript" src="./js/home_main.js"></script>
 <script src="./js/angular.js"></script>
@@ -43,7 +43,8 @@
 </style>
 <![endif]-->
 </head>
-<body style=""  ng-app="postsMod"><iframe frameborder="0" style="display: none;"></iframe>
+
+<body style=""  ng-app="postsMod" ng-controller="postsCtrl" ng-cloak><iframe frameborder="0" style="display: none;"></iframe>
 <!--header-->
 <header class="indexHead">
 <div class="headerWrap">
@@ -200,7 +201,7 @@
 		<!-- leftWrapTop end-->
 		
 						<!-- list -->
-        	<ul ng-controller="postsCtrl">
+        	<ul  >
 			<li ng-repeat="post in posts">
                     		<div class="list " articleid="" timesort="">
 			<div class="listTitle">
@@ -324,10 +325,10 @@
 		<!-- rightPanel end-->
                 
 		<!-- rightPanel-->
-		<div class="rightPanel" ng-controller="postsCtrl" >	
+		<div class="rightPanel"   >	
     <h2 class="panelTitle">今日最热</h2>
 
-    <ul class="rightHotNews">
+    <ul class="rightHotNews" >
         <!-- listCurrent <li class="listCurrent">-->
             <li class="listCurrent">
                     <a href="post.html?id={{hotPosts[0].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[0]) onclick=""><img src="{{hotPosts[0].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[0].title}}"  height="78" width="78"  /></a>
