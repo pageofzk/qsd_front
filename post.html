@@ -2,15 +2,15 @@
 <!-- saved from url=(0021)http://www.qiongsandai.com/ -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<link rel="stylesheet" href="./css/icon.css" type="text/css">
+<link rel="stylesheet" href="css/icon.css" type="text/css">
 <!--[if !IE]><!-->
-<link rel="stylesheet" href="./css/icon_notIE.css" type="text/css">
+<link rel="stylesheet" href="css/icon_notIE.css" type="text/css">
  <!--<![endif]-->
-<link rel="stylesheet" href="./css/main.css" type="text/css"> 
-<script type="text/javascript" src="./js/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="./js/main.js"></script>
+<link rel="stylesheet" href="css/main.css" type="text/css"> 
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
 
-<script src="./js/angular.js"></script>
+<script src="js/angular.js"></script>
 <script src="https://cn.avoscloud.com/scripts/lib/av-0.3.4.min.js"></script>
 <script type=text/javascript>
 s=location.search.substr(1);
@@ -20,15 +20,13 @@ for (i in params){
 param=params[i].split('=');
 paramMap.set(param[0],param[1]);
 }
-objid=paramMap.get('id');
+alert(paramMap.get('id'));
+if (paramMap.get('id')==null || paramMap.get('id').length == 0)
+	window.location.href='err.html';
 </script>
 
-<script type="text/javascript" src="./js/qsd.js"></script>
+<script type="text/javascript" src="js/qsd.js"></script>
 
-<!--[if lt IE 9]>
-<script src="http://www.qiongsandai.com/resources/public/js/html5.js?v=20150727"></script>
-<link rel="stylesheet" href="http://res.qiongsandai.com/resources/public/css/ieHack.css" type="text/css" />
-<![endif]-->
 <meta name="applicable-device" content="pc">
 <meta property="og:type" content="webpage">
 <meta property="og:url" content="www.qiongsandai.com/">
@@ -38,17 +36,13 @@ objid=paramMap.get('id');
 <meta name="weibo:webpage:create_at" content="">
 <meta name="weibo:webpage:update_at" content="">
 <meta name="mobile-agent" content="format=html5;url=http://m.qiongsandai.com/">
-<link rel="canonical" href="http://www.qiongsandai.com/www.qiongsandai.com">
+<link rel="canonical" href="http://www.qiongsandai.com">
 <title>穷三代 | 品质消费第一站_网购决策中立门户</title>
 <meta name="keywords" content="穷三代,摄影,摄影穷三代,相机入魔,资讯,剁手,器材,相机">
 <meta name="description" content="穷三代（QIONGSANDAI.COM）是一家集导购、媒体、工具、社区属性为一体的消费领域门户型网站，因其中立、专业而在众多网友中树立了良好口碑。穷三代网站力求成为消费者心目中的“品质消费第一站”，围绕品质消费理念，对所有消费场景下的消费者，以一站式入口提供更高效的消费决策 。">
 <meta name="apple-itunes-app" content="app-id=616615003">
 <meta name="application-name" content="穷三代 | 品质消费第一站_网购决策中立门户">
 <meta name="msapplication-TileColor" content="#f04848">
-<meta name="msapplication-square70x70logo" content="http://res.qiongsandai.com/images/ie/tiny.png">
-<meta name="msapplication-square150x150logo" content="http://res.qiongsandai.com/images/ie/square.png">
-<meta name="msapplication-wide310x150logo" content="http://res.qiongsandai.com/images/ie/wide.png">
-<meta name="msapplication-square310x310logo" content="http://res.qiongsandai.com/images/ie/large.png">
 <!--[if IE 7]>
 <style type=”text/css”>
 .blFormBox .wantItem{position: initial;}
@@ -65,15 +59,14 @@ objid=paramMap.get('id');
 		<a href="index.html" onclick="">首页</a>
 		<a href="news.html" onclick="" >资讯</a>
 		<a href="buy.html" onclick="" >剁手</a>
-        <a href="show.html" onclick="">种草</a>
 		<a href="libs.html" onclick="">器材库</a>
-        <a href="tools.html" onclick="">工具<span class="hot"><img src="./img/new.png"></span></a>
+        <a href="tools.html" onclick="">工具<span class="hot"><img src="img/new.png"></span></a>
         <div class="moreNav">
         <a href="#">更多</a>
         <i></i>
         <ul class="more_moreNav" aria-haspopup="true">
             <span></span>
-            <li><a href="contact.html" onclick="">联系我们</a></li>
+            <li><a href="contact-us.html" onclick="">联系我们</a></li>
             
         </ul>
 		</div>
@@ -100,9 +93,8 @@ objid=paramMap.get('id');
 			<a href="#">投稿</a>
 			<i></i>
 			<ul class="more_submission" aria-haspopup="true">
-        				<li><a href="http://www.qiongsandai.com/baoliao/" target="_blank">剁手</a></li>
-        				<li><a href="http://wiki.qiongsandai.com/create/" target="_blank">资讯</a></li>
-        				<li><a href="http://post.qiongsandai.com/tougao/" target="_blank">器材库</a></li>
+        				<li><a href="submit.html" target="_blank">剁手</a></li>
+        				<li><a href="submit.html" target="_blank">资讯</a></li>
 			</ul>
 		</div>
         <div class="more_user_news" id="chief_notice">
@@ -122,11 +114,11 @@ objid=paramMap.get('id');
 	<div class="logo_search">
         
         
-        <div class="logo"><a href="http://www.qiongsandai.com/"><img style="width:80px;" src="http://7xkfm0.com1.z0.glb.clouddn.com/logo.png?imageView2/1/w/80/h/80" alt="穷三代" /></a></div>
+        <div class="logo"><a href="index.html"><img style="width:80px;" src="http://7xkfm0.com1.z0.glb.clouddn.com/logo.png?imageView2/1/w/80/h/80" alt="穷三代" /></a></div>
 
         
     
-<div class="secondNav" ><span><a href="http://www.qiongsandai.com/" ng-if=post.doc_type=="news">资讯</a><a href="http://www.qiongsandai.com/" ng-if=post.doc_type=="buy">剁手</a></span></div>
+<div class="secondNav" ><span><a href="news.html" ng-if=post.doc_type=="news">资讯</a><a href="buy.html" ng-if=post.doc_type=="buy">剁手</a></span></div>
         <form class="form_search" action="http://search.qiongsandai.com/" id="searchform" method="get">
     <input type="hidden" name="c" value="youhui" readonly="readonly" />
     <button type="submit" class="btn_search icon-search"><!--[if lt IE 8]>Go<![endif]--></button>
@@ -139,7 +131,6 @@ objid=paramMap.get('id');
 </header>
 <!--header end--><!-- section -->
 
-<link rel="next" href="http://www.qiongsandai.com/p2">
 <!-- section -->
 <section class="wrap">
 	<!-- leftWrap-->
@@ -148,22 +139,22 @@ objid=paramMap.get('id');
 		<div class="crumbs">
 			当前位置：
             <div class="crumbsCate" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
-                <a href="http://www.qiongsandai.com/" itemprop="url">
+                <a href="index.html" itemprop="url">
                     <span itemprop="title">首页</span>
                 </a>
             </div>
             <span class="arrow">&gt;</span>
             <div class="crumbsCate" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
-                <a href="http://www.qiongsandai.com/" itemprop="url" ng-if=post.doc_type=="buy">
+                <a href="buy.html" itemprop="url" ng-if=post.doc_type=="buy">
                     <span itemprop="title">剁手</span>
                 </a>                
-				<a href="http://www.qiongsandai.com/" itemprop="url" ng-if=post.doc_type=="news">
+				<a href="news.html" itemprop="url" ng-if=post.doc_type=="news">
                     <span itemprop="title">资讯</span>
                 </a>
             </div>
             <span class="arrow">&gt;</span>
 			                    <div class="crumbsCate" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
-                        <a href="http://www.qiongsandai.com/" itemprop="url">
+                        <a href="#" itemprop="url">
                             <span itemprop="title">{{post.type}}</span>
                         </a>
                     </div>
@@ -191,7 +182,7 @@ objid=paramMap.get('id');
                     <dd></dd>
                 </dl>
                 <div class="article_picwrap">
-                                            <a class="picLeft" target="_blank" href="{{post.buy_url}}" onclick=""><img width="190px" height="190px" style="margin-top:0px" src="{{post.pic_left.url}}?imageView2/1/w/190/h/190"></a>
+                                            <a ng-if=post.doc_type=="buy" class="picLeft" target="_blank" href="{{post.buy_url}}" onclick=""><img width="190px" height="190px" style="margin-top:0px" src="{{post.pic_left.url}}?imageView2/1/w/190/h/190"></a>
                                                             <div class="buy" ng-if=post.doc_type=="buy">
 
                                                     <a href="{{post.buy_url}}" target="_blank" onclick="">直达链接<i>&gt;</i></a>
@@ -201,20 +192,12 @@ objid=paramMap.get('id');
                                         <a href="" onclick="" class="mall">{{post.mall}}</a>
                     
                 </div>
-			{{post.content}}
+				<span ng-bind-html = "post.content_html | trustHtml"></span>
+				<span ng-if=post.content_html=="">{{post.content}}</span>
             </div>
 		</article>
 		<!-- article end -->
 
-
-        <div style="margin-bottom:26px;clear:both;">
-
-        </div>
-
-        <!-- slogan -->
-        <div class="slogan">			“穷三代”是一个中立的，致力于帮助广大网友买到更有性价比网购产品的分享平台，每天为网友们提供严谨的、准确的、新鲜的、丰富的网购产品特价资讯。我们的信息大部分来自于网友爆料，如果您发现了优质的产品或好的价格，不妨给我们爆料（谢绝商家）吧，<a class="a_underline" target="_blank" href="http://www.qiongsandai.com/submit">点此爆料</a>。优惠信息有时效性和地域性，还请各位网友购买时注意核实。		
-        </div>
-        <!-- slogan end -->
 		
         <!-- scoreWrap -->
         <div class="score_rateBox" id="">
@@ -252,7 +235,7 @@ objid=paramMap.get('id');
         </div>
         <!-- scoreWrap end -->
 
-	<div class="ds-thread" data-thread-key="{{post.objectId}}" data-title="{{post.title}}" data-url="http://www.qiongsandai.com/post.html?id={{post.objectId}}"></div>
+	<div class="ds-thread" data-thread-key="{{post.objectId}}" data-title="{{post.title}}" data-url="post.html?id={{post.objectId}}"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
@@ -367,22 +350,16 @@ var duoshuoQuery = {short_name:"qsd"};
             <!-- rightLayer -->
     <div class="rightLayer" id="rightLayer" style="display: block; right: 86.5px; position: fixed; bottom: 0px;">
         <a href="javascript:void(0);" class="goTotop" id="backToTop" title="返回顶部" style="display: block;"><i class="icon-returntop"><!--[if lt IE 8]>返回顶部<![endif]--></i></a>
-        <a href="http://www.qiongsandai.com/feedback" class="suggest" target="_blank" title="用户反馈"><i class="icon-fankui"><!--[if lt IE 8]>用户反馈<![endif]--></i></a>
+        <a href="feedback.html" class="suggest" target="_blank" title="用户反馈"><i class="icon-fankui"><!--[if lt IE 8]>用户反馈<![endif]--></i></a>
     </div>
     <!-- rightLayer end -->
     	<div class="footer">
 		<div class="footerTop">
-			<a href="http://www.qiongsandai.com/about" target="_blank">关于我们</a>
-			<a href="http://www.qiongsandai.com/contact-us" target="_blank">联系我们</a>
-			<a href="http://www.qiongsandai.com/zhaopin/hot">招聘专区</a>
-			<a href="http://www.qiongsandai.com/sitemap.html" class="sitemap">网站地图</a>
-			<a href="http://haitao.qiongsandai.com/gonglve">海淘攻略</a>
-			<a href="http://haitao.qiongsandai.com/zixun">海淘资讯</a>
-			<a href="http://haitao.qiongsandai.com/shaiwu">海淘晒物</a>
+			<a href="about.html" target="_blank">关于我们</a>
+			<a href="contact-us.html" target="_blank">联系我们</a>
 		</div>
         		<div class="info">
-		版权所有 本站内容未经书面许可，禁止一切形式的转载。<br>
-		© copyright 2010-2015 穷三代. All rights reserved. 京ICP备12048526号-2 京公网安备 11010602100083
+		© copyright 2010-2015 穷三代. All rights reserved.
 		</div>
 	</div>
 </footer>
@@ -392,7 +369,7 @@ var duoshuoQuery = {short_name:"qsd"};
 
 <!--christmas-->
 <!--christmas end--><!-- banner -->
-<script type="text/javascript" src="./js/slick.js"></script>	
+<script type="text/javascript" src="js/slick.js"></script>	
 <!-- banner end -->
 <!-- pop login -->
 <div class="pop" id="pop-login">
@@ -446,6 +423,7 @@ var duoshuoQuery = {short_name:"qsd"};
         <div class="co_login">联合登录<a href="http://www.qiongsandai.com/user/third/sina?redirect_to=http%3A%2F%2Fwww.qiongsandai.com%2F" class="a_underline">新浪微博</a><a href="http://www.qiongsandai.com/user/third/tencent?redirect_to=http%3A%2F%2Fwww.qiongsandai.com%2F" class="a_underline">腾讯微博</a><a href="http://www.qiongsandai.com/user/third/qq?redirect_to=http%3A%2F%2Fwww.qiongsandai.com%2F" class="a_underline">腾讯QQ</a><a href="http://www.qiongsandai.com/user/third/wmw?redirect_to=http%3A%2F%2Fwww.qiongsandai.com%2F" class="a_underline">我买网</a></div>
         
     </div>
+</div>
 	<!-- pop-content end -->
-
+<div id="cover"></div>
 </body></html>

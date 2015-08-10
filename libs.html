@@ -13,10 +13,6 @@
 <script src="js/angular.js"></script>
 <script src="https://cn.avoscloud.com/scripts/lib/av-0.3.4.min.js"></script>
 <script type="text/javascript" src="js/qsd.js"></script>
-<!--[if lt IE 9]>
-<script src="http://www.qiongsandai.com/resources/public/js/html5.js?v=20150727"></script>
-<link rel="stylesheet" href="http://res.qiongsandai.com/resources/public/css/ieHack.css" type="text/css" />
-<![endif]-->
 <meta name="applicable-device" content="pc">
 <meta property="og:type" content="webpage">
 <meta property="og:url" content="www.qiongsandai.com/">
@@ -40,7 +36,7 @@
 <![endif]-->
 </head>
 
-<body style=""  ng-app="buysMod" ng-controller="buysCtrl" ng-cloak><iframe frameborder="0" style="display: none;"></iframe>
+<body style=""><iframe frameborder="0" style="display: none;"></iframe>
 <!--header-->
 <header class="indexHead">
 <div class="headerWrap">
@@ -101,9 +97,9 @@
 <div class="navBar oHeight">
     <nav class="oHeight">
 		<a href="index.html" onclick="">首页</a>
-		<a href="news.html" onclick="">资讯</a>
-		<a href="buy.html" onclick=""  class="active">剁手</a>
-		<a href="libs.html" onclick="">器材库</a>
+		<a href="news.html" onclick="" >资讯</a>
+		<a href="buy.html" onclick="" >剁手</a>
+		<a href="libs.html" onclick="" class="active">器材库</a>
         <a href="tools.html" onclick="">工具<span class="hot"><img src="img/new.png"></span></a>
         <div class="moreNav">
         <a href="#">更多</a>
@@ -138,125 +134,20 @@
 </div>
 </div>
 </header>
-<!-- section -->
 <section class="wrap">
 	<!-- leftWrap-->
 	<div class="leftWrap">
 				<!-- leftWrapTop -->
 		<div class="leftWrapTop">		
 
-<!-- screenPannel-->  			    
-<div class="screenPannel">
-
-    <!-- tab_nav-->
-            <ul class="tab_nav">
-                <li class="tab_li current_item"><span>分类筛选</span></li>
-                <li class="tab_li "><span>热门标签</span></li>
-                <li class="tab_li "><span>商城筛选</span></li>
-            </ul>
-            <!-- tab_nav end-->
-            <!-- more_screen--> 
-            <div class="more_screen">
-                <div class="tab_info"style="">
-                            <!-- tab_info-->
-
-                            <a href="">尼康</a>
-                            <a href="">佳能</a>
-                            <a href="">索尼</a>
-                            <a href="">松下</a>
-                            <a href="">奥林巴斯</a>
-                            <a href="">富士</a>
-                            <a href="">莱卡</a>
-                            <a href="">附件</a>
-                            <a href="">其他分类</a>
-                            <!-- tab_info end-->
-                </div>
-                <div class="tab_info" style="">
-                            <!-- tab_info-->  
-        
-                                        <a href="" onclick="">文艺范</a>
-                    <!-- tab_info end-->                </div>
-                                    <div class="tab_info" style="">
-                    <!-- tab_info-->       
-                                            <a href="" ng-click=filtPostByMall("锐意网")  onclick="" >锐意网</a>
-                                            <a href="" ng-click=filtPostByMall("卓美网") onclick="" >卓美网</a>
-                                            <a href="" ng-click=filtPostByMall("京东") onclick="" >京东</a>
-                                            <a href="" ng-click=filtPostByMall("易迅网") onclick="" >易迅网</a> 
-											<a href="" ng-click=filtPostByMall("新蛋中国") onclick="" >新蛋中国</a>
-                                            <a href="" ng-click=filtPostByMall("亚马逊中国") onclick="" >亚马逊中国</a>  
-											<a href="" ng-click=filtPostByMall("日本亚马逊") onclick="" >日本亚马逊</a>
-                                    <!-- tab_info end-->                </div>
-
-            </div>
-            <!-- more_screen end-->
-</div>
-        <!-- screenPannel end-->
 			<div class="clear"></div>
 		</div>
 		<!-- leftWrapTop end-->
 		
-						<!-- list -->
-        	<ul  >
-			<li ng-repeat="post in posts">
-                    		<div class="list " articleid="" timesort="">
-			<div class="listTitle">
-								<a href="" class="icon">{{post.doc_type}}</a>
-								<h4 class="itemName">
-                    <!--<a onclick="" href="{{post.url}}" target="_blank" ng-click=updatePostClick(post) >-->
-					<a onclick="" href="post.html?id={{post.objectId}}" target="_blank" ng-click=updatePostClick(post) >
-
-                        {{post.title}}                      
-
-                        <span class="red">{{post.price_txt}} </span>
-                    </a></h4>
-				<div class="clear"></div>
-			</div>
-            <a ng-click=updatePostClick(post) href="post.html?id={{post.objectId}}" target="_blank" class="picLeft" title="">
-                <img src="{{post.pic_left.url}}?imageView2/1/w/190/h/190" height="190px" width="190px" style="margin-top:0px" alt="{{post.title}}">
-            </a>
-			<div class="listRight">
-				<div class="lrTop">
-					<span class="lrTime">{{post.time.iso}}</span>
-															<span>
-						标签：                                                            <a href="post.html?id={{post.objectId}}">
-                                    {{post.tag}}                                </a>
-                                            															</span>
-									</div>
-				<div class="lrInfo">{{post.content}}...</div>
-				<div class="lrBot">
-										<a  ng-click=updatePostGood(post) class="good">
-						<span class="scoreTotal"><b>赞</b> <em>{{post.good}}</em></span>
-						<span class="scoredInfo">已打分</span>
-						<span class="scoreAnimate">+1</span>
-					</a>
-					<a  ng-click=updatePostBad(post) class="bad"
-						<span class="scoreTotal"><b>踩</b> <em>{{post.bad}}</em></span>
-						<span class="scoredInfo">已打分</span>
-						<span class="scoreAnimate">+1</span>					</a>
-					<a href="{post.html?id={{post.objectId}}#comments" class="comment" title="评论" target="_blank"><i class="icon-comment"><!--[if lt IE 8]>评论<![endif]--></i><em></em></a>
-										<div class="botPart" id="buybutton"  ng-if=post.doc_type=="buy">
-                        						<div class="buy" style="z-index: 2;" >
-                                                            <a href="{{post.buy_url}}" target="_blank" ng-click=updatePostClick(post) rel="nofollow" onclick="">直达链接<i>&gt;</i></a>
-                                                                                </div>
-                        																				<a href="" class="mall">{{post.mall}}</a>
-										</div>
-
-                                    
-
-					<div class="clear"></div>
-				</div>
-			</div>
-			<div class="clear"></div>
-		</div>
-			</li>
-			</ul>		                                        
-                    		
-        		                                        
-        		                                        
-                		
+						<!-- list -->		                                        
+						
         				<!-- list end -->
-		<img src="img/loading.gif"  class="center" style="padding:30px 0;"  ng-if=loading==1 alt="加载更多">
-		<p class="center" style="padding:30px 0;" ng-if=loading==2 >你已走到穷三代尽头~</p>
+		<p class="center" style="padding:30px 0;" >开发中~~</p>
 
 	</div>
 	<!-- leftWrap end-->
@@ -321,79 +212,9 @@
                 
 		<!-- rightPanel-->
 		<div class="rightPanel"   >	
-    <h2 class="panelTitle">最热降价</h2>
 
-    <ul class="rightHotNews" >
-        <!-- listCurrent <li class="listCurrent">-->
-            <li class="listCurrent">
-                    <a href="post.html?id={{hotPosts[0].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[0]) onclick=""><img src="{{hotPosts[0].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[0].title}}"  height="78" width="78"  /></a>
-                    <div class="listInfo">
-                        <div class="itemName"><a href="post.html?id={{hotPosts[0].objectId}}"  ng-click=updatePostClick(hotPosts[0]) target="_blank" onclick="">{{hotPosts[0].title}}</a></div>
-                        <div class="listBot"><span ”><i>赞</i>{{hotPosts[0].good}}</span><span><i>热度</i>{{hotPosts[0].click}}</span></div>
-                    </div>
-          </li>
-          <li class="listItem">
-                    <a href="post.html?id={{hotPosts[1].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[1]) onclick=""><img src="{{hotPosts[1].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[1].title}}"  height="78" width="78"  /></a>
-                    <div class="listInfo">
-                        <div class="itemName"><a href="post.html?id={{hotPosts[1].objectId}}"  ng-click=updatePostClick(hotPosts[1]) target="_blank" onclick="">{{hotPosts[1].title}}</a></div>
-                        <div class="listBot"><span ”><i>赞</i>{{hotPosts[1].good}}</span><span><i>热度</i>{{hotPosts[1].click}}</span></div>
-                    </div>
-          </li>
-          <li class="listItem">
-                    <a href="post.html?id={{hotPosts[2].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[2]) onclick=""><img src="{{hotPosts[2].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[2].title}}"  height="78" width="78"  /></a>
-                    <div class="listInfo">
-                        <div class="itemName"><a href="post.html?id={{hotPosts[2].objectId}}"  ng-click=updatePostClick(hotPosts[2]) target="_blank" onclick="">{{hotPosts[2].title}}</a></div>
-                        <div class="listBot"><span ”><i>赞</i>{{hotPosts[2].good}}</span><span><i>热度</i>{{hotPosts[2].click}}</span></div>
-                    </div>
-          </li>
-          <li class="listItem">
-                    <a href="post.html?id={{hotPosts[3].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[3]) onclick=""><img src="{{hotPosts[3].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[3].title}}"  height="78" width="78"  /></a>
-                    <div class="listInfo">
-                        <div class="itemName"><a href="post.html?id={{hotPosts[3].objectId}}"  ng-click=updatePostClick(hotPosts[3]) target="_blank" onclick="">{{hotPosts[3].title}}</a></div>
-                        <div class="listBot"><span ”><i>赞</i>{{hotPosts[3].good}}</span><span><i>热度</i>{{hotPosts[3].click}}</span></div>
-                    </div>
-          </li>
-          <li class="listItem">
-                    <a href="post.html?id={{hotPosts[4].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[4]) onclick=""><img src="{{hotPosts[4].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[4].title}}"  height="78" width="78"  /></a>
-                    <div class="listInfo">
-                        <div class="itemName"><a href="post.html?id={{hotPosts[4].objectId}}"  ng-click=updatePostClick(hotPosts[4]) target="_blank" onclick="">{{hotPosts[4].title}}</a></div>
-                        <div class="listBot"><span ”><i>赞</i>{{hotPosts[4].good}}</span><span><i>热度</i>{{hotPosts[4].click}}</span></div>
-                    </div>
-          </li>
-          
-          <li class="listItem">
-                    <a href="post.html?id={{hotPosts[5].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[5]) onclick=""><img src="{{hotPosts[5].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[5].title}}"  height="78" width="78"  /></a>
-                    <div class="listInfo">
-                        <div class="itemName"><a href="post.html?id={{hotPosts[5].objectId}}"  ng-click=updatePostClick(hotPosts[5]) target="_blank" onclick="">{{hotPosts[5].title}}</a></div>
-                        <div class="listBot"><span ”><i>赞</i>{{hotPosts[5].good}}</span><span><i>热度</i>{{hotPosts[5].click}}</span></div>
-                    </div>
-          </li>
-                    <!-- listCurrent end-->
-    </ul>
-</div>
+		</div>
 
-		<!-- rightPanel end-->
-        
-        <!-- rightPanel-->
-				        
-<div class="rightPanel">
-
-<!-- /147592458/穷三代-首页-02-300*250 -->
-<!-- <div id="div-gpt-ad-1428487695712-0" style="height:250px; width:300px;">-->
-</div>
-        <!-- rightPanel end-->
-        
-		<!-- rightPanel-->
-		<!-- rightPanel end-->
-        <!-- rightPanel-->
-        <!-- rightPanel end-->
-        <!-- rightPanel-->
-        <!-- rightPanel end-->
-
-        <!-- rightPanel-->
- <!-- rightPanel end-->
-        <!-- rightPanel-->
-                <!-- rightPanel end-->
   	</aside>
 	<!-- aside end -->
 	<div class="clear"></div>

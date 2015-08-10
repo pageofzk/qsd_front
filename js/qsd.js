@@ -49,12 +49,14 @@
 	  		}
 	  	})
 	  }
-
+	  var toggle = 1;
+	  $scope.gswap = false;
+	  $scope.bswap = false;
 	  $scope.updatePostGood = function(postParam) {
+		if (!$scope.gswap) {
 	  	var Post = AV.Object.extend("Post");
 	  	var query = new AV.Query(Post);
 	  	// 可以先查询出要修改的那条存储
-
 			// 这个 id 是要修改条目的 objectId，你在生成这个实例并成功保存时可以获取到，请看前面的文档
 			query.get(postParam.objectId, {
     			success: function(post) {
@@ -62,7 +64,8 @@
 				post.increment('good');
 				post.save();
 				$scope.$apply(function(){
-					postParam.good=postParam.good+1;
+					postParam.good=postParam.good+1
+					$scope.gswap = true;
 	  			})
     			},
     			error: function(object, error) {
@@ -70,9 +73,11 @@
       		console.log(object);
     			}
 	  	});
+		}
 	  }
 
 	  $scope.updatePostBad = function(postParam) {
+		if (!$scope.bswap) {
 	  	var Post = AV.Object.extend("Post");
 	  	var query = new AV.Query(Post);
 	  	// 可以先查询出要修改的那条存储
@@ -85,6 +90,7 @@
 				post.save();
 				$scope.$apply(function(){
 					postParam.bad=postParam.bad+1;
+					$scope.bswap = true;
 	  			})
     			},
     			error: function(object, error) {
@@ -92,6 +98,7 @@
       		console.log(object);
     			}
 	  	});
+		}
 	  }
 
 	  $scope.updatePostClick = function(postParam) {
@@ -179,6 +186,7 @@
 	  $scope.gethotPosts = function() {
 	  	var Post = AV.Object.extend("Post");
 	  	var query = new AV.Query(Post);
+		query.equalTo("doc_type", "buy");
 	  	query.descending("click");
 	  	query.limit(6);
 	  	query.find({
@@ -320,6 +328,7 @@
 	  $scope.gethotPosts = function() {
 	  	var Post = AV.Object.extend("Post");
 	  	var query = new AV.Query(Post);
+		query.equalTo("doc_type", "news");
 	  	query.descending("click");
 	  	query.limit(6);
 	  	query.find({
@@ -436,6 +445,15 @@
     $scope.getPosts();
     $scope.gethotPosts();
 	}]);
+	postMod.filter('trustHtml', function ($sce) {
+
+        return function (input) {
+
+            return $sce.trustAsHtml(input);
+
+        }
+
+    });
 	postMod.controller("postCtrl",['$http', '$scope', function($http, $scope){
 
 	  $scope.getPost = function(objectId) {
@@ -449,8 +467,6 @@
 	  			})
     			},
     			error: function(object, error) {
-      		// 失败了.
-      		console.log(object);
     			}
 	  	});
 	  }
@@ -534,6 +550,6 @@
 	  	});
 	  }
     $scope.getPost(paramMap.get('id'));
-		$scope.gethotPosts();
+	$scope.gethotPosts();
 	}]);
 })();
