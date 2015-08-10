@@ -154,7 +154,7 @@
 	}
 	  
 	$(window).on('scroll', function (event) {   //jquery，事件滚动监听         
-		if ($(document).scrollTop() + $(window).height() >= $(document).height() - 1) { //当滚动到页面底部             
+		if ($(document).scrollTop() + $(window).height() >= $(document).height() - 200) { //当滚动到页面底部             
 		pushContent();                      //调用向$scope.posts添加内容函数         
 	  }
 	});
@@ -296,7 +296,7 @@
 	}
 	  
 	$(window).on('scroll', function (event) {   //jquery，事件滚动监听         
-		if ($(document).scrollTop() + $(window).height() >= $(document).height() - 1) { //当滚动到页面底部             
+		if ($(document).scrollTop() + $(window).height() >= $(document).height() - 200) { //当滚动到页面底部             
 		pushContent();                      //调用向$scope.posts添加内容函数         
 	  }
 	});
@@ -437,8 +437,8 @@
 	})
 	}
 	  
-	$(window).on('scroll', function (event) {   //jquery，事件滚动监听         
-		if ($(document).scrollTop() + $(window).height() >= $(document).height() - 1) { //当滚动到页面底部             
+	$(window).on('scroll', function (event) {   //jquery，事件滚动监听
+		if ($(document).scrollTop() + $(window).height() >= $(document).height() - 200) { //当滚动到页面底部             
 		pushContent();                      //调用向$scope.posts添加内容函数         
 	  }
 	});
