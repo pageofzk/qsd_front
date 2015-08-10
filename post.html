@@ -12,17 +12,6 @@
 
 <script src="js/angular.js"></script>
 <script src="https://cn.avoscloud.com/scripts/lib/av-0.3.4.min.js"></script>
-<script type=text/javascript>
-s=location.search.substr(1);
-params=s.split('&');
-var paramMap = new Map();
-for (i in params){
-param=params[i].split('=');
-paramMap.set(param[0],param[1]);
-}
-if (paramMap.get('id')==null || paramMap.get('id').length == 0)
-	window.location.href='err.html';
-</script>
 
 <script type="text/javascript" src="js/qsd.js"></script>
 
