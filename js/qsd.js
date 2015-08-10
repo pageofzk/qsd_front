@@ -454,7 +454,7 @@
         }
 
     });
-	postMod.controller("postCtrl",['$http', '$scope',  function($http, $scope){
+	postMod.controller("postCtrl",['$http', '$scope', function($http, $scope){
 
 	  $scope.getPost = function(objectId) {
 	  	var Post = AV.Object.extend("Post");
@@ -549,15 +549,15 @@
     			}
 	  	});
 	  }
-	
-	s=window.location.search.substr(1);
+	  
+	s=location.search.substr(1);
 	params=s.split('&');
 	var paramMap = new Map();
 	for (i in params){
-	param=params[i].split('=');
-	paramMap.set(param[0],param[1]);
+		param=params[i].split('=');
+		paramMap.set(param[0],param[1]);
 	}
-	if (paramMap.get('id')==null || paramMap.get('id') == 0)
+	if (paramMap.get('id')==null || paramMap.get('id').length == 0)
 		window.location.href='err.html';
     $scope.getPost(paramMap.get('id'));
 	$scope.gethotPosts();
