@@ -157,7 +157,7 @@
 			<div class="article_meta article_meta_nowrap">
                 <span class="lrTime">{{post.time.iso}}</span>
                 <meta itemprop="datePublished" content="2015-08-05 14:00">
-                <div class="recommend lFloat">来源：<a href="{{post.url}}" onclick="">{{post.from}}</a></div>                            <span class="lFloat">分类：
+                <div class="recommend lFloat">来源：<a  target="_blank" href="{{post.url}}" onclick="">{{post.from}}</a></div>                            <span class="lFloat">分类：
                                                     <a href="" onclick="">{{post.type}}</a>
                                             </span>
                                                     <span class="lFloat">标签：
@@ -173,11 +173,11 @@
                                             <a ng-if=post.doc_type=="buy" class="picLeft" target="_blank" href="{{post.buy_url}}" onclick=""><img width="190px" height="190px" style="margin-top:0px" src="{{post.pic_left.url}}?imageView2/1/w/190/h/190"></a>
                                                             <div class="buy" ng-if=post.doc_type=="buy">
 
-                                                    <a href="{{post.buy_url}}" target="_blank" onclick="">直达链接<i>&gt;</i></a>
+                                                    <a href="{{post.buy_url}}" target="_blank" onclick="">去看看<i>&gt;</i></a>
                         
                                             </div>
                     
-                                        <a href="" onclick="" class="mall">{{post.mall}}</a>
+                                        <a href="{{post.buy_url}}" onclick="" target="_blank" class="mall">{{post.mall}}</a>
                     
                 </div>
 				<span ng-bind-html = "post.content_html | trustHtml"></span>
@@ -185,40 +185,19 @@
             </div>
 		</article>
 		<!-- article end -->
-
+<div style="margin-bottom:26px;clear:both;">
+</div>
 		
         <!-- scoreWrap -->
-        <div class="score_rateBox" id="">
-            
-            <div id="details-zhi" class="details_zhi">
-                <a href="javascript:void(0);" class="" onclick="" ng-click=updatePostGood(post) id="rating_worthy">
-                        <i class="icon-worth"><!--[if lt IE 8]>值<![endif]--></i>
-                        <span class="addNumber add">+1</span>
+        <div class="score_rateBox show_exp_zan" id="">
+            <div id="details-zan" class="details_zan">
+                <a id="" onclick=";" ng-click=updatePostGood(post) ref="" class="zan" title="赞">
+                    <i class="icon-zan"></i>
+                    <span class="addNumber add">+1</span>
                 </a>
-                <span class="scoredInfo">已打分</span>
+                <span class="scoredInfo">已赞</span>
             </div>
-            
-            <div class="score_rate" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
-                <span class="grey" id="rating_all_num">已有 {{post.good + post.bad}} 用户参与</span>
-                <span style="display: none;" itemprop="reviewCount">{{post.good}}</span>
-                <meta itemprop="ratingValue" content="{{post.good * 100 / (post.good + post.bad)}}%">
-                <div class="progressBox">
-                    <div style="width:{{post.good * 100 / (post.good + post.bad)}}%" class="progressing">
-                    </div>
-                </div>
-                <span class="red" id="rating_worthy_num">
-                    {{post.good}}                </span> : 
-                <span class="grey" id="rating_unworthy_num">
-                    {{post.bad}}                </span>
-            </div>
-            
-            <div id="details-buzhi" class="details_buzhi">
-                <a href="javascript:void(0);" class="" onclick="" ng-click=updatePostBad(post) id="rating_unworthy">
-                    <i class="icon-Unworthy"><!--[if lt IE 8]>不值<![endif]--></i>
-                    <span class="addNumber reduce">+1</span>
-                </a>
-                <span class="scoredInfo">已打分</span>
-            </div>
+            <span class="grey">已有<em>{{post.good}}</em>人赞过</span>
             
         </div>
         <!-- scoreWrap end -->
@@ -336,8 +315,8 @@ var duoshuoQuery = {short_name:"qsd"};
 
 <footer id="footer">
             <!-- rightLayer -->
-    <div class="rightLayer" id="rightLayer" style="display: block; right: 86.5px; position: fixed; bottom: 0px;">
-        <a href="javascript:void(0);" class="goTotop" id="backToTop" title="返回顶部" style="display: block;"><i class="icon-returntop"><!--[if lt IE 8]>返回顶部<![endif]--></i></a>
+    <div class="rightLayer" id="rightLayer" style="display: block; right: 83.5px; position: fixed; bottom: 0px;">
+        <a href="javascript:void(0);" class="goTotop" id="backToTop" title="返回顶部" style="display: none;"><i class="icon-returntop"><!--[if lt IE 8]>返回顶部<![endif]--></i></a>
         <a href="feedback.html" class="suggest" target="_blank" title="用户反馈"><i class="icon-fankui"><!--[if lt IE 8]>用户反馈<![endif]--></i></a>
     </div>
     <!-- rightLayer end -->
@@ -346,10 +325,10 @@ var duoshuoQuery = {short_name:"qsd"};
 			<a href="about.html" target="_blank">关于我们</a>
 			<a href="contact-us.html" target="_blank">联系我们</a>
 		</div>
-        		<div class="info">
+	<div class="info">
 		© copyright 2010-2015 穷三代. All rights reserved.
 		</div>
-	</div>
+    </div>
 </footer>
 
 
