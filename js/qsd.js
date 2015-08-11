@@ -583,7 +583,7 @@
 	  	});
 	  }
 	  
-	s=location.search.substr(1);
+	s=window.location.search.substr(1);
 	params=s.split('&');
 	var paramMap = new Map();
 	for (i in params){
