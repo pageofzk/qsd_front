@@ -479,7 +479,11 @@
         }
 
     });
-	postMod.controller("postCtrl",['$http', '$scope', function($http, $scope){
+	
+	postMod.config(['$locationProvider', function($locationProvider) {  
+		$locationProvider.html5Mode(true);  
+	}]); 
+	postMod.controller("postCtrl",['$http', '$scope', '$location', function($http, $scope, $location){
 
 	  $scope.getPost = function(objectId) {
 	  	var Post = AV.Object.extend("Post");
@@ -582,7 +586,11 @@
     			}
 	  	});
 	  }
-	  
+	if ($location.search().id) {  
+		$scope.id = $location.search().id;  
+	}
+
+	/*
 	s=window.location.search.substr(1);
 	params=s.split('&');
 	var paramMap = new Map();
@@ -592,7 +600,11 @@
 	}
 	if (paramMap.get('id')==null || paramMap.get('id').length == 0)
 		window.location.href='err.html';
-    $scope.getPost(paramMap.get('id'));
+		
+	*/
+	if ($scope.id==null || $scope.id.length == 0)
+		window.location.href='err.html';
+    $scope.getPost($scope.id);
 	$scope.gethotPosts();
 	}
 	]);
