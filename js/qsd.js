@@ -594,5 +594,14 @@
 		window.location.href='err.html';
     $scope.getPost(paramMap.get('id'));
 	$scope.gethotPosts();
-	}]);
+	}
+	]);
+})();
+
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?288976a40588d0b72643ed39573e39dd";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
 })();
