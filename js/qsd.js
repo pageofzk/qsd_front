@@ -638,6 +638,27 @@
 
     });
 	
+	postMod.directive("comment", function() {
+		return {
+			restrict: 'A',
+			link: function(scope){
+				// get the variable from controller
+				var article_id = scope.id;
+				
+				var data_thread_key = 'article_' + article_id;
+				var data_url = 'http://qiongsandai.com/post.html?id=' + article_id;
+				var data_title = article_id;
+				// dynamic load the duoshuo comment box
+				var el = document.createElement('div');//该div不需要设置class="ds-thread"
+				el.setAttribute('data-thread-key', data_thread_key);//必选参数
+				el.setAttribute('data-url', data_url);//必选参数
+				el.setAttribute('data-title', data_title);//可选参数
+				DUOSHUO.EmbedThread(el);
+				jQuery('#comment-box').append(el);
+			}
+		};
+	});
+	
 	postMod.config(['$locationProvider', function($locationProvider) {  
 		$locationProvider.html5Mode(true);  
 	}]); 
@@ -744,10 +765,11 @@
     			}
 	  	});
 	  }
+
+	  
 	if ($location.search().id) {  
 		$scope.id = $location.search().id;  
 	}
-
 	/*
 	s=window.location.search.substr(1);
 	params=s.split('&');

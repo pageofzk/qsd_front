@@ -8,7 +8,8 @@
  <!--<![endif]-->
 <link rel="stylesheet" href="css/main.css" type="text/css"> 
 <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-
+<script>var duoshuoQuery = {short_name:"qsd"};</script>
+<script src="http://static.duoshuo.com/embed.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script src="js/angular.js"></script>
 <script src="js/av-0.3.4.min.js"></script>
@@ -206,21 +207,8 @@
             
         </div>
         <!-- scoreWrap end -->
-
-	<div class="ds-thread" data-thread-key="{{post.objectId}}" data-title="{{post.title}}" data-url="post.html?id={{post.objectId}}"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"qsd"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
+<div id="comment-box"></div> 
+<div comment></div>
 
 	</div>
 	<!-- leftWrap end-->
