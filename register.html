@@ -75,7 +75,7 @@
                                 <li ><a href="http://www.qiongsandai.com/user/qingdan" >我的清单</a></li>
                                 <li><a href="http://www.qiongsandai.com/user/logout" >退出登录</a></li>
 			</ul>
-		</div>	
+		</div>
         <div class="more_user_news" id="chief_notice">
 			<i class="icon-cross-lighter close"></i>
 			<a id="notice_message" href="#"><em></em>条新消息</a>
@@ -107,8 +107,74 @@
 <!--headerWrap end-->
 
 </header>
-<!--header end--><!-- section -->
-<p class="center" style="padding:30px 0;" >开发中~~</p>
+<section class="wrap">
+    <!-- pop-title -->	
+    <div class="pop-title">
+        <div class="pop_name">注册<span class="grey">发现属于你的精彩~</span></div>    </div>
+    <!-- pop-title end -->
+
+    <!-- pop-content -->		
+    <div class="pop-content accountPage">
+        <form id="register_form" class="form-content" action="/user/register" method="post">
+            <!-- form-item -->
+            <div class="form-item">
+                <div class="item-tip">邮箱</div>
+                <input id="user_email" class="form-input" type="text" name="user_email" value="" tabindex="1">
+                <span class="error"></span><i class="icon-loginright"><!--[if lt IE 8]>成功<![endif]--></i>			
+            </div>
+            <!-- form-item end -->
+            <!-- form-item -->		
+            <input type="hidden" name="f4cedec54b8448999" value="xVpzuxZ0wKfh4Y8FxnPGNA==">
+            <div class="form-item">
+                <div class="item-tip">密码</div>
+                <input id="user_pass" class="form-input" type="password" name="user_pass" tabindex="2">
+                <span class="error"></span><i class="icon-loginright"><!--[if lt IE 8]>成功<![endif]--></i>
+                <span class="grey" style="display:none;">6 - 20位</span>
+            </div>	
+            <!-- form-item end -->			
+            <!-- form-item -->			
+            <div class="form-item">
+                <div class="item-tip">确认密码</div>
+                <input id="user_pass2" class="form-input" type="password" name="user_pass2" tabindex="3">
+                <span class="error"></span><i class="icon-loginright"><!--[if lt IE 8]>成功<![endif]--></i>
+            </div>	
+            <!-- form-item end -->			
+            <!-- form-item -->			
+            <div class="form-item">
+                <div class="item-tip">用户昵称</div>
+                <input id="display_name" class="form-input" type="text" name="display_name" value="" tabindex="4">
+                <span class="error"></span><i class="icon-loginright"><!--[if lt IE 8]>成功<![endif]--></i>
+                <span class="grey" style="display:none;">允许用中英文、数字、下划线，提交后不可修改</span>
+            </div>	
+            <!-- form-item end -->
+            <!-- form-item -->
+
+            <div class="captchaBox">
+                                <div class="form-item">
+                    <div class="item-tip">验证码</div>				
+                    <input id="captcha" class="form-input" type="text" name="captcha" autocomplete="off" tabindex="5">
+                </div>
+                <div class="captcha_imgBox">
+                    <img onclick="document.getElementById('captcha_img').src = '/user/getcaptcha/ch/register?' + Math.random();
+                            document.getElementById('captcha').focus();
+                            return false;" id="captcha_img" src="/user/getcaptcha/ch/register" title="看不清?点击更换" alt="看不清?点击更换">				
+                </div>
+                <span id="captcha_error" class="refresh lFloat">看不清?<a onclick="document.getElementById('captcha_img').src = '/user/getcaptcha/ch/register?' + Math.random();
+                        document.getElementById('captcha').focus();
+                        return false;" href="javascript:void(0);" class="a_underline">点击更换</a></span>
+                <span id="captcha_error_text" class="error" style="line-height:34px;"></span><i id="captcha_success" class="icon-loginright"><!--[if lt IE 8]>成功<![endif]--></i>
+                                <div class="twoWeeks"><input type="checkbox" id="agreement" class="ckeckBox" checked="checked" tabindex="6"><label for="agreement">同意“<a href="provisions.html" class="a_underline" target="_blank">穷三代用户使用协议</a>”</label></div>
+
+            </div>
+            <p class="notice_error notice_error_300"></p>
+            <!-- form-item end -->
+            <input type="hidden" name="is_third" value="0">
+            <input type="submit" class="btn_reg" value="注&nbsp;&nbsp;册" tabindex="7">
+        </form>
+    </div>
+    <!-- pop-content end -->
+
+</section>
 
 <footer id="footer">
 
