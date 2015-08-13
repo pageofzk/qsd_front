@@ -166,7 +166,7 @@
                     <dd></dd>
                 </dl>
                 <div class="article_picwrap">
-                                            <a ng-if=post.doc_type=="buy" class="picLeft" target="_blank" href="{{post.buy_url}}" onclick=""><img width="190px" height="190px" style="margin-top:0px" src="{{post.pic_left.url}}?imageView2/1/w/190/h/190"></a>
+                                            <a ng-if=post.doc_type=="buy" class="picLeft" target="_blank" href="{{post.buy_url}}" onclick=""><img width="190px" height="190px" style="margin-top:0px" ng-src="{{post.pic_left.url}}?imageView2/1/w/190/h/190"></a>
                                                             <div class="buy" ng-if=post.doc_type=="buy">
 
                                                     <a href="{{post.buy_url}}" target="_blank" onclick="">去看看<i>&gt;</i></a>
@@ -220,35 +220,35 @@
     <ul class="rightHotNews">
         <!-- listCurrent <li class="listCurrent">-->
             <li class="listCurrent">
-                    <a href="post.html?id={{hotPosts[0].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[0]) onclick=""><img src="{{hotPosts[0].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[0].title}}"  height="78" width="78"  /></a>
+                    <a href="post.html?id={{hotPosts[0].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[0]) onclick=""><img ng-src="{{hotPosts[0].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[0].title}}"  height="78" width="78"  /></a>
                     <div class="listInfo">
                         <div class="itemName"><a href="post.html?id={{hotPosts[0].objectId}}"  ng-click=updatePostClick(hotPosts[0]) target="_blank" onclick="">{{hotPosts[0].title}}</a></div>
                         <div class="listBot"><span ”><i>赞</i>{{hotPosts[0].good}}</span><span><i>热度</i>{{hotPosts[0].click}}</span></div>
                     </div>
           </li>
           <li class="listItem">
-                    <a href="post.html?id={{hotPosts[1].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[1]) onclick=""><img src="{{hotPosts[1].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[1].title}}"  height="78" width="78"  /></a>
+                    <a href="post.html?id={{hotPosts[1].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[1]) onclick=""><img ng-src="{{hotPosts[1].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[1].title}}"  height="78" width="78"  /></a>
                     <div class="listInfo">
                         <div class="itemName"><a href="post.html?id={{hotPosts[1].objectId}}"  ng-click=updatePostClick(hotPosts[1]) target="_blank" onclick="">{{hotPosts[1].title}}</a></div>
                         <div class="listBot"><span ”><i>赞</i>{{hotPosts[1].good}}</span><span><i>热度</i>{{hotPosts[1].click}}</span></div>
                     </div>
           </li>
           <li class="listItem">
-                    <a href="post.html?id={{hotPosts[2].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[2]) onclick=""><img src="{{hotPosts[2].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[2].title}}"  height="78" width="78"  /></a>
+                    <a href="post.html?id={{hotPosts[2].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[2]) onclick=""><img ng-src="{{hotPosts[2].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[2].title}}"  height="78" width="78"  /></a>
                     <div class="listInfo">
                         <div class="itemName"><a href="post.html?id={{hotPosts[2].objectId}}"  ng-click=updatePostClick(hotPosts[2]) target="_blank" onclick="">{{hotPosts[2].title}}</a></div>
                         <div class="listBot"><span ”><i>赞</i>{{hotPosts[2].good}}</span><span><i>热度</i>{{hotPosts[2].click}}</span></div>
                     </div>
           </li>
           <li class="listItem">
-                    <a href="post.html?id={{hotPosts[3].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[3]) onclick=""><img src="{{hotPosts[3].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[3].title}}"  height="78" width="78"  /></a>
+                    <a href="post.html?id={{hotPosts[3].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[3]) onclick=""><img ng-src="{{hotPosts[3].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[3].title}}"  height="78" width="78"  /></a>
                     <div class="listInfo">
                         <div class="itemName"><a href="post.html?id={{hotPosts[3].objectId}}"  ng-click=updatePostClick(hotPosts[3]) target="_blank" onclick="">{{hotPosts[3].title}}</a></div>
                         <div class="listBot"><span ”><i>赞</i>{{hotPosts[3].good}}</span><span><i>热度</i>{{hotPosts[3].click}}</span></div>
                     </div>
           </li>
           <li class="listItem">
-                    <a href="post.html?id={{hotPosts[4].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[4]) onclick=""><img src="{{hotPosts[4].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[4].title}}"  height="78" width="78"  /></a>
+                    <a href="post.html?id={{hotPosts[4].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[4]) onclick=""><img ng-src="{{hotPosts[4].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[4].title}}"  height="78" width="78"  /></a>
                     <div class="listInfo">
                         <div class="itemName"><a href="post.html?id={{hotPosts[4].objectId}}"  ng-click=updatePostClick(hotPosts[4]) target="_blank" onclick="">{{hotPosts[4].title}}</a></div>
                         <div class="listBot"><span ”><i>赞</i>{{hotPosts[4].good}}</span><span><i>热度</i>{{hotPosts[4].click}}</span></div>
@@ -256,7 +256,7 @@
           </li>
           
           <li class="listItem">
-                    <a href="post.html?id={{hotPosts[5].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[5]) onclick=""><img src="{{hotPosts[5].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[5].title}}"  height="78" width="78"  /></a>
+                    <a href="post.html?id={{hotPosts[5].objectId}}" class="smallPic" target="_blank"  ng-click=updatePostClick(hotPosts[5]) onclick=""><img ng-src="{{hotPosts[5].pic_left.url}}?imageView2/1/w/78/h/78" alt="{{hotPosts[5].title}}"  height="78" width="78"  /></a>
                     <div class="listInfo">
                         <div class="itemName"><a href="post.html?id={{hotPosts[5].objectId}}"  ng-click=updatePostClick(hotPosts[5]) target="_blank" onclick="">{{hotPosts[5].title}}</a></div>
                         <div class="listBot"><span ”><i>赞</i>{{hotPosts[5].good}}</span><span><i>热度</i>{{hotPosts[5].click}}</span></div>
