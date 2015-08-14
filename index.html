@@ -49,10 +49,13 @@
             <div class="cake" style="width:168px;padding-top:20px;"><img style="width:128px;" src="http://7xkfm0.com1.z0.glb.clouddn.com/slogan.png?imageView2" alt="摄影穷三代"></div>
 
                      <form class="form_search" action="" id="" method="get">
-    <input type="hidden" name="c" value="home" readonly="readonly">
+					 
     <button type="submit" class="btn_search icon-search"><!--[if lt IE 8]>Go<![endif]--></button>
     <input id="s" name="s" type="search" ng-model="search" ng-click=tagClick(search) class="text_search" value="镜头" onblur="if(this.value==&#39;&#39;) {this.value=&#39;镜头&#39;;this.style.color=&#39;#999&#39;;}" onfocus="if(this.value==&#39;镜头&#39;) {this.value=&#39;&#39;;this.style.color=&#39;#333&#39;;}">
-</form>           <div class="loginArea">
+            
+</form>
+			
+          <div class="loginArea">
 
               		          <a href="register.html" class="rFloat" id="navBar_reg">注册</a>
                   <a class="rFloat" id="navBar_login">登录</a>
@@ -124,6 +127,7 @@
                 <li class="tab_li current_item"><span>品牌筛选</span></li>
                 <li class="tab_li "><span>热门标签</span></li>
             </ul>
+			
             <!-- tab_nav end-->
             <!-- more_screen--> 
             <div class="more_screen">
@@ -140,15 +144,20 @@
             </div>
             <!-- more_screen end-->
 </div>
+
+
         <!-- screenPannel end-->
 			<div class="clear"></div>
+			<div class="tab_info">
+			<input type="checkbox"  ng-model="searchTitle"> 只搜索标题
+			</div>
 		</div>
 		<!-- leftWrapTop end-->
 		
 						<!-- list -->
         	<ul  >
-			<li ng-repeat="post in posts| filter:search ">
-			<!--<li ng-repeat="post in posts| filter : {title tag : search}">-->
+			<li ng-repeat="post in posts| filter : {title : search}">
+			
                     		<div class="list " articleid="" timesort="">
 			<div class="listTitle">
 								<a href="{{post.doc_type}}.html" class="icon">{{post.doc_type}}</a>
