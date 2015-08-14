@@ -48,10 +48,10 @@
             
             <div class="cake" style="width:168px;padding-top:20px;"><img style="width:128px;" src="http://7xkfm0.com1.z0.glb.clouddn.com/slogan.png?imageView2" alt="摄影穷三代"></div>
 
-                     <form class="form_search" action="http://search.qiongsandai.com/" id="searchform" method="get">
+                     <form class="form_search" action="" id="" method="get">
     <input type="hidden" name="c" value="home" readonly="readonly">
     <button type="submit" class="btn_search icon-search"><!--[if lt IE 8]>Go<![endif]--></button>
-    <input id="s" name="s" type="search" class="text_search" value="镜头" onblur="if(this.value==&#39;&#39;) {this.value=&#39;镜头&#39;;this.style.color=&#39;#999&#39;;}" onfocus="if(this.value==&#39;镜头&#39;) {this.value=&#39;&#39;;this.style.color=&#39;#333&#39;;}">
+    <input id="s" name="s" type="search" ng-model="search" ng-click=tagClick(search) class="text_search" value="镜头" onblur="if(this.value==&#39;&#39;) {this.value=&#39;镜头&#39;;this.style.color=&#39;#999&#39;;}" onfocus="if(this.value==&#39;镜头&#39;) {this.value=&#39;&#39;;this.style.color=&#39;#333&#39;;}">
 </form>           <div class="loginArea">
 
               		          <a href="register.html" class="rFloat" id="navBar_reg">注册</a>
@@ -121,7 +121,7 @@
 
     <!-- tab_nav-->
             <ul class="tab_nav">
-                <li class="tab_li current_item"><span>分类筛选</span></li>
+                <li class="tab_li current_item"><span>品牌筛选</span></li>
                 <li class="tab_li "><span>热门标签</span></li>
             </ul>
             <!-- tab_nav end-->
@@ -129,22 +129,12 @@
             <div class="more_screen">
                 <div class="tab_info"style="">
                             <!-- tab_info-->
-
-                            <a href="">尼康</a>
-                            <a href="">佳能</a>
-                            <a href="">索尼</a>
-                            <a href="">松下</a>
-                            <a href="">奥林巴斯</a>
-                            <a href="">富士</a>
-                            <a href="">莱卡</a>
-                            <a href="">附件</a>
-                            <a href="">其他分类</a>
+                            <a href="#" ng-repeat="tag in tags| filter : {type : 'brand'}" ng-click=tagClick(tag.name)>{{tag.name}}</a>
                             <!-- tab_info end-->
                 </div>
                 <div class="tab_info" style="">
                             <!-- tab_info-->  
-        
-                                        <a href="" onclick="">文艺范</a>
+							<a href="#" ng-repeat="tag in tags| filter : {type : 'hot'}" ng-click=tagClick(tag.name)>{{tag.name}}</a>
                     <!-- tab_info end-->                </div>
 
             </div>
@@ -157,7 +147,8 @@
 		
 						<!-- list -->
         	<ul  >
-			<li ng-repeat="post in posts">
+			<li ng-repeat="post in posts| filter:search ">
+			<!--<li ng-repeat="post in posts| filter : {title tag : search}">-->
                     		<div class="list " articleid="" timesort="">
 			<div class="listTitle">
 								<a href="{{post.doc_type}}.html" class="icon">{{post.doc_type}}</a>
@@ -178,8 +169,8 @@
 				<div class="lrTop">
 					<span class="lrTime">{{post.time.iso}}</span>
 															<span>
-						标签：                                                            <a href="post.html?id={{post.objectId}}">
-                                    {{post.tag}}                                </a>
+						标签：                                                            <a ng-repeat="tag in post.tag" ng-click=tagClick(tag) href="">
+                                    {{tag}}                                </a>
                                             															</span>
 									</div>
 				<div class="lrInfo">{{post.content}}...</div>

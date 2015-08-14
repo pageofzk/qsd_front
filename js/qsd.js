@@ -22,24 +22,9 @@
 	});
 	
 	testsMod.controller("testsCtrl",['$http', '$scope', function($http, $scope){
-	  $scope.posts = [];
-
-
-	  $scope.getPosts = function() {
-	  	var Post = AV.Object.extend("Post");
-	  	var query = new AV.Query(Post);
-		query.equalTo("doc_type", "test");
-	  	query.limit(10);
-	  	query.descending("time");
-	  	query.find({
-	  		success:function (results){
-	  			$scope.$apply(function(){
-	  				$scope.posts = JSON.parse(JSON.stringify(results));;
-	  			})
-	  		}
-	  	})
-	  }
-
+	  
+	  
+	  
 	  $scope.hotPosts = [];
 
 	  $scope.gethotPosts = function() {
@@ -131,67 +116,114 @@
 		}
 	  }
 	  
-	var page = 1;                               //读取的页数         
+	var readNum = 100;                              //读取的页数
+	var showNum = 10;                               //展现的页数
 	$scope.loading = 0;						//判断是否正在读取内容的变量
-	function pushContent() {                    //核心是这个函数，向$scope.posts
-	//添加内容          
-	var Post = AV.Object.extend("Post");
-	var query = new AV.Query(Post);
-	query.equalTo("doc_type", "test");
-	query.descending("time");
-	query.skip(10*page); 
-	query.limit(10);
-	$scope.$apply(function(){
-	if ($scope.loading==0) {                         //如果页面没有正在读取
-		$scope.loading = 1;                     //告知正在读取             
-	  	query.find({						//调用API，读取第几页的内容                 
+	
+	$scope.tags = [];
+
+
+	  $scope.getTags = function() {
+	  	var Tag = AV.Object.extend("ShowTags");
+	  	var query = new AV.Query(Tag);
+	  	query.ascending ("createdAt");
+	  	query.find({
 	  		success:function (results){
-	  				posts = JSON.parse(JSON.stringify(results));
-					if (posts.length != 0) {
-						for (var i = 0; i <= posts.length - 1; i++) {                         
-							$scope.posts.push(posts[i]);                     
-						}
-						page++;  						//翻页		
-						$scope.loading = 0;        //告知读取结束
-					} else {
-						$scope.loading = 2;        //告知读取完毕
+	  			$scope.$apply(function(){
+	  				$scope.tags = JSON.parse(JSON.stringify(results));
+	  			})
+	  		}
+	  	})
+	  }
+	  $scope.getTags();
+	
+	$scope.tagClick = function(tag) {
+		$scope.search = tag;
+		var i = $scope.posts.length;
+		for (;i < $scope.readPosts.length; i++) {
+			$scope.posts.push($scope.readPosts[i]);
+		}
+		if (readNum < 1000) {
+			showNum=readNum;
+			readNum=readNum*5;
+		}
+		fillContent();
+	}
+	$scope.posts = [];
+	$scope.readPosts = [];
+
+	$scope.getPosts = function() {
+	  	var Post = AV.Object.extend("Post");
+	  	var query = new AV.Query(Post);
+		query.equalTo("doc_type", "test");
+	  	query.limit(readNum);
+	  	query.descending("time");
+	  	query.find({
+	  		success:function (results){
+	  			$scope.$apply(function(){
+	  				$scope.readPosts = JSON.parse(JSON.stringify(results));
+					for (var i = 0; i < showNum && i < $scope.readPosts.length; i++) {
+						$scope.posts.push($scope.readPosts[i]);                     
 					}
-					
-	  		},
-			error: function(error) {
-			}
+				})
+	  		}
+	  	})
+	}
+	function fillContent() {                    //核心是这个函数，向$scope.posts
+	if ($scope.readPosts.length == 0 || $scope.posts.length == 0)
+		return;	
+	if ($scope.posts.length < $scope.readPosts.length) {
+		$scope.$apply(function(){
+		var oldlen = $scope.posts.length;
+		var i = $scope.posts.length
+		for (; i < oldlen + showNum && i < $scope.readPosts.length; i++) {
+			$scope.posts.push($scope.readPosts[i]);                     
+		}
+		})
+	} else {
+		//请求内容          
+		var Post = AV.Object.extend("Post");
+		var query = new AV.Query(Post);
+		query.equalTo("doc_type", "test");
+		query.descending("time");
+		query.skip($scope.readPosts.length);
+		query.limit(readNum);
+		$scope.$apply(function(){
+		if ($scope.loading==0) {                     //如果页面正在读取
+			$scope.loading = 1;                     //告知正在读取             
+			query.find({						//调用API，读取第几页的内容                 
+				success:function (results){
+						posts = JSON.parse(JSON.stringify(results));
+						if (posts.length != 0) {
+							for (var i = 0; i <= posts.length - 1; i++) {                         
+								$scope.readPosts.push(posts[i]);
+							}
+							$scope.loading = 0;        //告知读取结束
+						} else {
+							$scope.loading = 2;        //告知读取完毕
+						}
+						
+				},
+				error: function(error) {
+				}
+			})
+		}
 		})
 	}
-	})
+	
+
 	}
 	  
 	$(window).on('scroll', function (event) {   //jquery，事件滚动监听         
 		if ($(document).scrollTop() + $(window).height() >= $(document).height() - 200) { //当滚动到页面底部             
-		pushContent();                      //调用向$scope.posts添加内容函数         
+		fillContent();                      //调用向$scope.posts添加内容函数         
 	  }
 	});
     $scope.getPosts();
     $scope.gethotPosts();
-	}]);
+}]);
 	
 	postsMod.controller("postsCtrl",['$http', '$scope', function($http, $scope){
-	  $scope.posts = [];
-
-
-	  $scope.getPosts = function() {
-	  	var Post = AV.Object.extend("Post");
-	  	var query = new AV.Query(Post);
-	  	query.limit(10);
-	  	query.descending("time");
-	  	query.find({
-	  		success:function (results){
-	  			$scope.$apply(function(){
-	  				$scope.posts = JSON.parse(JSON.stringify(results));;
-	  			})
-	  		}
-	  	})
-	  }
-
 	  $scope.hotPosts = [];
 
 	  $scope.gethotPosts = function() {
@@ -281,66 +313,113 @@
 		}
 	  }
 	  
-	var page = 1;                               //读取的页数         
+	var readNum = 100;                              //读取的页数
+	var showNum = 10;                               //展现的页数
 	$scope.loading = 0;						//判断是否正在读取内容的变量
-	function pushContent() {                    //核心是这个函数，向$scope.posts
-	//添加内容          
-	var Post = AV.Object.extend("Post");
-	var query = new AV.Query(Post);
-	query.descending("time");
-	query.skip(10*page); 
-	query.limit(10);
-	$scope.$apply(function(){
-	if ($scope.loading==0) {                         //如果页面没有正在读取
-		$scope.loading = 1;                     //告知正在读取             
-	  	query.find({						//调用API，读取第几页的内容                 
+	
+	$scope.tags = [];
+
+
+	  $scope.getTags = function() {
+	  	var Tag = AV.Object.extend("ShowTags");
+	  	var query = new AV.Query(Tag);
+	  	query.ascending ("createdAt");
+	  	query.find({
 	  		success:function (results){
-	  				posts = JSON.parse(JSON.stringify(results));
-					if (posts.length != 0) {
-						for (var i = 0; i <= posts.length - 1; i++) {                         
-							$scope.posts.push(posts[i]);                     
-						}
-						page++;  						//翻页		
-						$scope.loading = 0;        //告知读取结束
-					} else {
-						$scope.loading = 2;        //告知读取完毕
+	  			$scope.$apply(function(){
+	  				$scope.tags = JSON.parse(JSON.stringify(results));
+	  			})
+	  		}
+	  	})
+	  }
+	  $scope.getTags();
+	
+	$scope.tagClick = function(tag) {
+		$scope.search = tag;
+		var i = $scope.posts.length;
+		for (;i < $scope.readPosts.length; i++) {
+			$scope.posts.push($scope.readPosts[i]);
+		}
+		if (readNum < 1000) {
+			showNum=readNum;
+			readNum=readNum*5;
+		}
+		fillContent();
+	}
+	$scope.posts = [];
+	$scope.readPosts = [];
+
+	$scope.getPosts = function() {
+	  	var Post = AV.Object.extend("Post");
+	  	var query = new AV.Query(Post);
+	  	query.limit(readNum);
+	  	query.descending("time");
+	  	query.find({
+	  		success:function (results){
+	  			$scope.$apply(function(){
+	  				$scope.readPosts = JSON.parse(JSON.stringify(results));
+					for (var i = 0; i < showNum && i < $scope.readPosts.length; i++) {
+						$scope.posts.push($scope.readPosts[i]);                     
 					}
-					
-	  		},
-			error: function(error) {
-			}
+				})
+	  		}
+	  	})
+	}
+	function fillContent() {                    //核心是这个函数，向$scope.posts
+	if ($scope.readPosts.length == 0 || $scope.posts.length == 0)
+		return;	
+	if ($scope.posts.length < $scope.readPosts.length) {
+		$scope.$apply(function(){
+		var oldlen = $scope.posts.length;
+		var i = $scope.posts.length
+		for (; i < oldlen + showNum && i < $scope.readPosts.length; i++) {
+			$scope.posts.push($scope.readPosts[i]);                     
+		}
+		})
+	} else {
+		//请求内容          
+		var Post = AV.Object.extend("Post");
+		var query = new AV.Query(Post);
+		query.descending("time");
+		query.skip($scope.readPosts.length);
+		query.limit(readNum);
+		$scope.$apply(function(){
+		if ($scope.loading==0) {                     //如果页面正在读取
+			$scope.loading = 1;                     //告知正在读取             
+			query.find({						//调用API，读取第几页的内容                 
+				success:function (results){
+						posts = JSON.parse(JSON.stringify(results));
+						if (posts.length != 0) {
+							for (var i = 0; i <= posts.length - 1; i++) {                         
+								$scope.readPosts.push(posts[i]);
+							}
+							$scope.loading = 0;        //告知读取结束
+						} else {
+							$scope.loading = 2;        //告知读取完毕
+						}
+						
+				},
+				error: function(error) {
+				}
+			})
+		}
 		})
 	}
-	})
+	
+
 	}
 	  
 	$(window).on('scroll', function (event) {   //jquery，事件滚动监听         
 		if ($(document).scrollTop() + $(window).height() >= $(document).height() - 200) { //当滚动到页面底部             
-		pushContent();                      //调用向$scope.posts添加内容函数         
+		fillContent();                      //调用向$scope.posts添加内容函数         
 	  }
 	});
     $scope.getPosts();
     $scope.gethotPosts();
-	}]);
+}]);
 	
 	buysMod.controller("buysCtrl",['$http', '$scope', function($http, $scope){
-	  $scope.posts = [];
 
-
-	  $scope.getPosts = function() {
-	  	var Post = AV.Object.extend("Post");
-	  	var query = new AV.Query(Post);
-		query.equalTo("doc_type", "buy");
-	  	query.limit(10);
-	  	query.descending("time");
-	  	query.find({
-	  		success:function (results){
-	  			$scope.$apply(function(){
-	  				$scope.posts = JSON.parse(JSON.stringify(results));;
-	  			})
-	  		}
-	  	})
-	  }
 
 	  $scope.hotPosts = [];
 
@@ -432,68 +511,115 @@
 	  	});
 		}
 	  }
-	  
-	var page = 1;                               //读取的页数         
+	var readNum = 100;                              //读取的页数
+	var showNum = 10;                               //展现的页数
 	$scope.loading = 0;						//判断是否正在读取内容的变量
-	function pushContent() {                    //核心是这个函数，向$scope.posts
-	//添加内容          
-	var Post = AV.Object.extend("Post");
-	var query = new AV.Query(Post);
-	query.equalTo("doc_type", "buy");
-	query.descending("time");
-	query.skip(10*page); 
-	query.limit(10);
-	$scope.$apply(function(){
-	if ($scope.loading==0) {                         //如果页面没有正在读取
-		$scope.loading = 1;                     //告知正在读取             
-	  	query.find({						//调用API，读取第几页的内容                 
+	
+	$scope.tags = [];
+
+
+	  $scope.getTags = function() {
+	  	var Tag = AV.Object.extend("ShowTags");
+	  	var query = new AV.Query(Tag);
+	  	query.ascending ("createdAt");
+	  	query.find({
 	  		success:function (results){
-	  				posts = JSON.parse(JSON.stringify(results));
-					if (posts.length != 0) {
-						for (var i = 0; i <= posts.length - 1; i++) {                         
-							$scope.posts.push(posts[i]);                     
-						}
-						page++;  						//翻页		
-						$scope.loading = 0;        //告知读取结束
-					} else {
-						$scope.loading = 2;        //告知读取完毕
+	  			$scope.$apply(function(){
+	  				$scope.tags = JSON.parse(JSON.stringify(results));
+	  			})
+	  		}
+	  	})
+	  }
+	  $scope.getTags();
+	
+	$scope.tagClick = function(tag) {
+		$scope.search = tag;
+		var i = $scope.posts.length;
+		for (;i < $scope.readPosts.length; i++) {
+			$scope.posts.push($scope.readPosts[i]);
+		}
+		if (readNum < 1000) {
+			showNum=readNum;
+			readNum=readNum*5;
+		}
+		fillContent();
+	}
+	$scope.posts = [];
+	$scope.readPosts = [];
+
+	$scope.getPosts = function() {
+	  	var Post = AV.Object.extend("Post");
+	  	var query = new AV.Query(Post);
+		query.equalTo("doc_type", "buy");
+	  	query.limit(readNum);
+	  	query.descending("time");
+	  	query.find({
+	  		success:function (results){
+	  			$scope.$apply(function(){
+	  				$scope.readPosts = JSON.parse(JSON.stringify(results));
+					for (var i = 0; i < showNum && i < $scope.readPosts.length; i++) {
+						$scope.posts.push($scope.readPosts[i]);                     
 					}
-					
-	  		},
-			error: function(error) {
-			}
+				})
+	  		}
+	  	})
+	}
+	function fillContent() {                    //核心是这个函数，向$scope.posts
+	if ($scope.readPosts.length == 0 || $scope.posts.length == 0)
+		return;	
+	if ($scope.posts.length < $scope.readPosts.length) {
+		$scope.$apply(function(){
+		var oldlen = $scope.posts.length;
+		var i = $scope.posts.length
+		for (; i < oldlen + showNum && i < $scope.readPosts.length; i++) {
+			$scope.posts.push($scope.readPosts[i]);                     
+		}
+		})
+	} else {
+		//请求内容          
+		var Post = AV.Object.extend("Post");
+		var query = new AV.Query(Post);
+		query.equalTo("doc_type", "buy");
+		query.descending("time");
+		query.skip($scope.readPosts.length);
+		query.limit(readNum);
+		$scope.$apply(function(){
+		if ($scope.loading==0) {                     //如果页面正在读取
+			$scope.loading = 1;                     //告知正在读取             
+			query.find({						//调用API，读取第几页的内容                 
+				success:function (results){
+						posts = JSON.parse(JSON.stringify(results));
+						if (posts.length != 0) {
+							for (var i = 0; i <= posts.length - 1; i++) {                         
+								$scope.readPosts.push(posts[i]);
+							}
+							$scope.loading = 0;        //告知读取结束
+						} else {
+							$scope.loading = 2;        //告知读取完毕
+						}
+						
+				},
+				error: function(error) {
+				}
+			})
+		}
 		})
 	}
-	})
+	
+
 	}
 	  
 	$(window).on('scroll', function (event) {   //jquery，事件滚动监听         
 		if ($(document).scrollTop() + $(window).height() >= $(document).height() - 200) { //当滚动到页面底部             
-		pushContent();                      //调用向$scope.posts添加内容函数         
+		fillContent();                      //调用向$scope.posts添加内容函数         
 	  }
 	});
     $scope.getPosts();
     $scope.gethotPosts();
-	}]);
+}]);
 	
 	newsMod.controller("newsCtrl",['$http', '$scope', function($http, $scope){
-	  $scope.posts = [];
 
-
-	  $scope.getPosts = function() {
-	  	var Post = AV.Object.extend("Post");
-	  	var query = new AV.Query(Post);
-		query.equalTo("doc_type", "news");
-	  	query.limit(10);
-	  	query.descending("time");
-	  	query.find({
-	  		success:function (results){
-	  			$scope.$apply(function(){
-	  				$scope.posts = JSON.parse(JSON.stringify(results));;
-	  			})
-	  		}
-	  	})
-	  }
 
 	  $scope.hotPosts = [];
 
@@ -586,48 +712,112 @@
 		}
 	  }
 	  
-	var page = 1;                               //读取的页数         
+	var readNum = 100;                              //读取的页数
+	var showNum = 10;                               //展现的页数
 	$scope.loading = 0;						//判断是否正在读取内容的变量
-	function pushContent() {                    //核心是这个函数，向$scope.posts
-	//添加内容          
-	var Post = AV.Object.extend("Post");
-	var query = new AV.Query(Post);
-	query.equalTo("doc_type", "news");
-	query.descending("time");
-	query.skip(10*page); 
-	query.limit(10);
-	$scope.$apply(function(){
-	if ($scope.loading==0) {                         //如果页面没有正在读取
-		$scope.loading = 1;                     //告知正在读取             
-	  	query.find({						//调用API，读取第几页的内容                 
+	
+	$scope.tags = [];
+
+
+	  $scope.getTags = function() {
+	  	var Tag = AV.Object.extend("ShowTags");
+	  	var query = new AV.Query(Tag);
+	  	query.ascending ("createdAt");
+	  	query.find({
 	  		success:function (results){
-	  				posts = JSON.parse(JSON.stringify(results));
-					if (posts.length != 0) {
-						for (var i = 0; i <= posts.length - 1; i++) {                         
-							$scope.posts.push(posts[i]);                     
-						}
-						page++;  						//翻页		
-						$scope.loading = 0;        //告知读取结束
-					} else {
-						$scope.loading = 2;        //告知读取完毕
+	  			$scope.$apply(function(){
+	  				$scope.tags = JSON.parse(JSON.stringify(results));
+	  			})
+	  		}
+	  	})
+	  }
+	  $scope.getTags();
+	
+	$scope.tagClick = function(tag) {
+		$scope.search = tag;
+		var i = $scope.posts.length;
+		for (;i < $scope.readPosts.length; i++) {
+			$scope.posts.push($scope.readPosts[i]);
+		}
+		if (readNum < 1000) {
+			showNum=readNum;
+			readNum=readNum*5;
+		}
+		fillContent();
+	}
+	$scope.posts = [];
+	$scope.readPosts = [];
+
+	$scope.getPosts = function() {
+	  	var Post = AV.Object.extend("Post");
+	  	var query = new AV.Query(Post);
+		query.equalTo("doc_type", "news");
+	  	query.limit(readNum);
+	  	query.descending("time");
+	  	query.find({
+	  		success:function (results){
+	  			$scope.$apply(function(){
+	  				$scope.readPosts = JSON.parse(JSON.stringify(results));
+					for (var i = 0; i < showNum && i < $scope.readPosts.length; i++) {
+						$scope.posts.push($scope.readPosts[i]);                     
 					}
-					
-	  		},
-			error: function(error) {
-			}
+				})
+	  		}
+	  	})
+	}
+	function fillContent() {                    //核心是这个函数，向$scope.posts
+	if ($scope.readPosts.length == 0 || $scope.posts.length == 0)
+		return;	
+	if ($scope.posts.length < $scope.readPosts.length) {
+		$scope.$apply(function(){
+		var oldlen = $scope.posts.length;
+		var i = $scope.posts.length
+		for (; i < oldlen + showNum && i < $scope.readPosts.length; i++) {
+			$scope.posts.push($scope.readPosts[i]);                     
+		}
+		})
+	} else {
+		//请求内容          
+		var Post = AV.Object.extend("Post");
+		var query = new AV.Query(Post);
+		query.equalTo("doc_type", "news");
+		query.descending("time");
+		query.skip($scope.readPosts.length);
+		query.limit(readNum);
+		$scope.$apply(function(){
+		if ($scope.loading==0) {                     //如果页面正在读取
+			$scope.loading = 1;                     //告知正在读取             
+			query.find({						//调用API，读取第几页的内容                 
+				success:function (results){
+						posts = JSON.parse(JSON.stringify(results));
+						if (posts.length != 0) {
+							for (var i = 0; i <= posts.length - 1; i++) {                         
+								$scope.readPosts.push(posts[i]);
+							}
+							$scope.loading = 0;        //告知读取结束
+						} else {
+							$scope.loading = 2;        //告知读取完毕
+						}
+						
+				},
+				error: function(error) {
+				}
+			})
+		}
 		})
 	}
-	})
+	
+
 	}
 	  
-	$(window).on('scroll', function (event) {   //jquery，事件滚动监听
+	$(window).on('scroll', function (event) {   //jquery，事件滚动监听         
 		if ($(document).scrollTop() + $(window).height() >= $(document).height() - 200) { //当滚动到页面底部             
-		pushContent();                      //调用向$scope.posts添加内容函数         
+		fillContent();                      //调用向$scope.posts添加内容函数         
 	  }
 	});
     $scope.getPosts();
     $scope.gethotPosts();
-	}]);
+}]);
 	postMod.filter('trustHtml', function ($sce) {
 
         return function (input) {
