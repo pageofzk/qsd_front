@@ -21,29 +21,12 @@
 
 	});
 	
-	testsMod.controller("testsCtrl",['$http', '$scope', function($http, $scope){
+	testsMod.controller("testsCtrl",['$http', '$scope', '$filter',function($http, $scope, $filter){
 	  
 	  
 	  
 	  $scope.hotPosts = [];
 
-	  $scope.gethotPosts = function() {
-	  	var Post = AV.Object.extend("Post");
-	  	var query = new AV.Query(Post);
-	  	var now = new Date();
-			var date = new Date(((now.getTime() - 3 * 24 * 3600 * 1000)/(24*3600*1000)) *24*3600*1000);
-	  	query.greaterThan("time", date);
-		query.equalTo("doc_type", "test");
-	  	query.descending("click");
-	  	query.limit(6);
-	  	query.find({
-	  		success:function (results){
-	  			$scope.$apply(function(){
-	  				$scope.hotPosts = JSON.parse(JSON.stringify(results));
-	  			})
-	  		}
-	  	})
-	  }
 
 	  $scope.gswap = false;
 	  $scope.bswap = false;
@@ -139,7 +122,31 @@
 	  	})
 	  }
 	  $scope.getTags();
-	
+	$scope.searchFilter = function(e){
+		if (!$scope.search)
+			return true;
+
+		var isHit = false;
+		var targetStr = (e.title + e.tag + e.mall).toLowerCase();
+		var sStr = $scope.search.toLowerCase();
+		//空格查询
+		if (sStr.indexOf(" ")) {
+			var ss= new Array(); //定义一数组 
+			ss=sStr.split(" "); //字符分割
+			for (i=0;i<ss.length ;i++ ) {
+					if (targetStr.indexOf(ss[i]) >= 0) {
+						isHit = true;
+					} else {
+						isHit = false;
+						break;
+					}
+			}
+		} else {
+			if (targetStr.indexOf(sStr) >= 0)
+				isHit = true;
+		}
+		return isHit;
+	}
 	$scope.tagClick = function(tag) {
 		$scope.search = tag;
 		var i = $scope.posts.length;
@@ -168,6 +175,7 @@
 					for (var i = 0; i < showNum && i < $scope.readPosts.length; i++) {
 						$scope.posts.push($scope.readPosts[i]);                     
 					}
+					$scope.hotPosts = $filter('orderBy')($scope.readPosts,'-click'); 
 				})
 	  		}
 	  	})
@@ -191,7 +199,6 @@
 		query.descending("time");
 		query.skip($scope.readPosts.length);
 		query.limit(readNum);
-		$scope.$apply(function(){
 		if ($scope.loading==0) {                     //如果页面正在读取
 			$scope.loading = 1;                     //告知正在读取             
 			query.find({						//调用API，读取第几页的内容                 
@@ -211,7 +218,6 @@
 				}
 			})
 		}
-		})
 	}
 	
 
@@ -223,29 +229,12 @@
 	  }
 	});
     $scope.getPosts();
-    $scope.gethotPosts();
+    //$scope.gethotPosts();
 }]);
 	
-	postsMod.controller("postsCtrl",['$http', '$scope', function($http, $scope){
+	postsMod.controller("postsCtrl",['$http', '$scope', '$filter',function($http, $scope, $filter){
 	  $scope.hotPosts = [];
 
-	  $scope.gethotPosts = function() {
-	  	var Post = AV.Object.extend("Post");
-	  	var query = new AV.Query(Post);
-	  	var now = new Date();
-			var date = new Date(((now.getTime() - 3 * 24 * 3600 * 1000)/(24*3600*1000)) *24*3600*1000);
-			query.notEqualTo("doc_type", "test");
-	  	query.greaterThan("time", date);
-	  	query.descending("click");
-	  	query.limit(6);
-	  	query.find({
-	  		success:function (results){
-	  			$scope.$apply(function(){
-	  				$scope.hotPosts = JSON.parse(JSON.stringify(results));
-	  			})
-	  		}
-	  	})
-	  }
 	  $scope.gswap = false;
 	  $scope.bswap = false;
 	  $scope.cswap = false;
@@ -340,7 +329,31 @@
 	  	})
 	  }
 	  $scope.getTags();
-	
+	$scope.searchFilter = function(e){
+		if (!$scope.search)
+			return true;
+
+		var isHit = false;
+		var targetStr = (e.title + e.tag + e.mall).toLowerCase();
+		var sStr = $scope.search.toLowerCase();
+		//空格查询
+		if (sStr.indexOf(" ")) {
+			var ss= new Array(); //定义一数组 
+			ss=sStr.split(" "); //字符分割
+			for (i=0;i<ss.length ;i++ ) {
+					if (targetStr.indexOf(ss[i]) >= 0) {
+						isHit = true;
+					} else {
+						isHit = false;
+						break;
+					}
+			}
+		} else {
+			if (targetStr.indexOf(sStr) >= 0)
+				isHit = true;
+		}
+		return isHit;
+	}
 	$scope.tagClick = function(tag) {
 		$scope.search = tag;
 		var i = $scope.posts.length;
@@ -369,6 +382,7 @@
 					for (var i = 0; i < showNum && i < $scope.readPosts.length; i++) {
 						$scope.posts.push($scope.readPosts[i]);                     
 					}
+					$scope.hotPosts = $filter('orderBy')($scope.readPosts,'-click'); 
 				})
 	  		}
 	  	})
@@ -392,7 +406,6 @@
 		query.descending("time");
 		query.skip($scope.readPosts.length);
 		query.limit(readNum);
-		$scope.$apply(function(){
 		if ($scope.loading==0) {                     //如果页面正在读取
 			$scope.loading = 1;                     //告知正在读取             
 			query.find({						//调用API，读取第几页的内容                 
@@ -412,7 +425,6 @@
 				}
 			})
 		}
-		})
 	}
 	
 
@@ -424,32 +436,14 @@
 	  }
 	});
     $scope.getPosts();
-    $scope.gethotPosts();
+    //$scope.gethotPosts();
 }]);
 	
-	buysMod.controller("buysCtrl",['$http', '$scope', function($http, $scope){
+	buysMod.controller("buysCtrl",['$http', '$scope', '$filter',function($http, $scope, $filter){
 
 
 	  $scope.hotPosts = [];
 
-	  $scope.gethotPosts = function() {
-	  	var Post = AV.Object.extend("Post");
-	  	var query = new AV.Query(Post);
-	  	var now = new Date();
-			var date = new Date(((now.getTime() - 3 * 24 * 3600 * 1000)/(24*3600*1000)) *24*3600*1000);
-	  	query.greaterThan("time", date);
-			query.equalTo("doc_type", "buy");
-
-	  	query.descending("click");
-	  	query.limit(6);
-	  	query.find({
-	  		success:function (results){
-	  			$scope.$apply(function(){
-	  				$scope.hotPosts = JSON.parse(JSON.stringify(results));
-	  			})
-	  		}
-	  	})
-	  }
 
 	  $scope.gswap = false;
 	  $scope.bswap = false;
@@ -544,7 +538,31 @@
 	  	})
 	  }
 	  $scope.getTags();
-	
+	$scope.searchFilter = function(e){
+		if (!$scope.search)
+			return true;
+
+		var isHit = false;
+		var targetStr = (e.title + e.tag + e.mall).toLowerCase();
+		var sStr = $scope.search.toLowerCase();
+		//空格查询
+		if (sStr.indexOf(" ")) {
+			var ss= new Array(); //定义一数组 
+			ss=sStr.split(" "); //字符分割
+			for (i=0;i<ss.length ;i++ ) {
+					if (targetStr.indexOf(ss[i]) >= 0) {
+						isHit = true;
+					} else {
+						isHit = false;
+						break;
+					}
+			}
+		} else {
+			if (targetStr.indexOf(sStr) >= 0)
+				isHit = true;
+		}
+		return isHit;
+	}
 	$scope.tagClick = function(tag) {
 		$scope.search = tag;
 		var i = $scope.posts.length;
@@ -573,6 +591,8 @@
 					for (var i = 0; i < showNum && i < $scope.readPosts.length; i++) {
 						$scope.posts.push($scope.readPosts[i]);                     
 					}
+
+    			$scope.hotPosts = $filter('orderBy')($scope.readPosts,'-click'); 
 				})
 	  		}
 	  	})
@@ -596,7 +616,6 @@
 		query.descending("time");
 		query.skip($scope.readPosts.length);
 		query.limit(readNum);
-		$scope.$apply(function(){
 		if ($scope.loading==0) {                     //如果页面正在读取
 			$scope.loading = 1;                     //告知正在读取             
 			query.find({						//调用API，读取第几页的内容                 
@@ -616,10 +635,7 @@
 				}
 			})
 		}
-		})
 	}
-	
-
 	}
 	  
 	$(window).on('scroll', function (event) {   //jquery，事件滚动监听         
@@ -628,31 +644,10 @@
 	  }
 	});
     $scope.getPosts();
-    $scope.gethotPosts();
+    //$scope.gethotPosts();
 }]);
 	
-	newsMod.controller("newsCtrl",['$http', '$scope', function($http, $scope){
-
-
-	  $scope.hotPosts = [];
-
-	  $scope.gethotPosts = function() {
-	  	var Post = AV.Object.extend("Post");
-	  	var query = new AV.Query(Post);
-	  	var now = new Date();
-			var date = new Date(((now.getTime() - 3 * 24 * 3600 * 1000)/(24*3600*1000)) *24*3600*1000);
-	  	query.greaterThan("time", date);
-		query.equalTo("doc_type", "news");
-	  	query.descending("click");
-	  	query.limit(6);
-	  	query.find({
-	  		success:function (results){
-	  			$scope.$apply(function(){
-	  				$scope.hotPosts = JSON.parse(JSON.stringify(results));
-	  			})
-	  		}
-	  	})
-	  }
+	newsMod.controller("newsCtrl",['$http', '$scope', '$filter',function($http, $scope, $filter){
 
 	  $scope.gswap = false;
 	  $scope.bswap = false;
@@ -748,7 +743,31 @@
 	  	})
 	  }
 	  $scope.getTags();
-	
+	$scope.searchFilter = function(e){
+		if (!$scope.search)
+			return true;
+
+		var isHit = false;
+		var targetStr = (e.title + e.tag + e.mall).toLowerCase();
+		var sStr = $scope.search.toLowerCase();
+		//空格查询
+		if (sStr.indexOf(" ")) {
+			var ss= new Array(); //定义一数组 
+			ss=sStr.split(" "); //字符分割
+			for (i=0;i<ss.length ;i++ ) {
+					if (targetStr.indexOf(ss[i]) >= 0) {
+						isHit = true;
+					} else {
+						isHit = false;
+						break;
+					}
+			}
+		} else {
+			if (targetStr.indexOf(sStr) >= 0)
+				isHit = true;
+		}
+		return isHit;
+	}
 	$scope.tagClick = function(tag) {
 		$scope.search = tag;
 		var i = $scope.posts.length;
@@ -777,6 +796,7 @@
 					for (var i = 0; i < showNum && i < $scope.readPosts.length; i++) {
 						$scope.posts.push($scope.readPosts[i]);                     
 					}
+					$scope.hotPosts = $filter('orderBy')($scope.readPosts,'-click'); 
 				})
 	  		}
 	  	})
@@ -800,7 +820,6 @@
 		query.descending("time");
 		query.skip($scope.readPosts.length);
 		query.limit(readNum);
-		$scope.$apply(function(){
 		if ($scope.loading==0) {                     //如果页面正在读取
 			$scope.loading = 1;                     //告知正在读取             
 			query.find({						//调用API，读取第几页的内容                 
@@ -820,7 +839,6 @@
 				}
 			})
 		}
-		})
 	}
 	
 
@@ -832,7 +850,7 @@
 	  }
 	});
     $scope.getPosts();
-    $scope.gethotPosts();
+    //$scope.gethotPosts();
 }]);
 	postMod.filter('trustHtml', function ($sce) {
 
@@ -993,7 +1011,7 @@
 	*/
 	if ($scope.id==null || $scope.id.length == 0)
 		window.location.href='err.html';
-    $scope.getPost($scope.id);
+	$scope.getPost($scope.id);
 	$scope.gethotPosts();
 	}
 	]);

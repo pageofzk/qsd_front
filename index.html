@@ -156,7 +156,7 @@
 		
 						<!-- list -->
         	<ul  >
-			<li ng-repeat="post in posts| filter : {title : search}">
+			<li ng-repeat="post in posts| filter : searchFilter">
 			
                     		<div class="list " articleid="" timesort="">
 			<div class="listTitle">
@@ -178,8 +178,8 @@
 				<div class="lrTop">
 					<span class="lrTime">{{post.time.iso}}</span>
 															<span>
-						标签：                                                            <a ng-repeat="tag in post.tag" ng-click=tagClick(tag) href="">
-                                    {{tag}}                                </a>
+						标签：                                                            <a ng-repeat="posttag in post.tag track by $index" ng-click=tagClick(posttag) href="">
+                                    {{posttag}}                                </a>
                                             															</span>
 									</div>
 				<div class="lrInfo">{{post.content}}...</div>
