@@ -30,6 +30,9 @@
 	  $scope.gethotPosts = function() {
 	  	var Post = AV.Object.extend("Post");
 	  	var query = new AV.Query(Post);
+	  	var now = new Date();
+			var date = new Date(((now.getTime() - 3 * 24 * 3600 * 1000)/(24*3600*1000)) *24*3600*1000);
+	  	query.greaterThan("time", date);
 		query.equalTo("doc_type", "test");
 	  	query.descending("click");
 	  	query.limit(6);
@@ -116,7 +119,7 @@
 		}
 	  }
 	  
-	var readNum = 100;                              //读取的页数
+	var readNum = 50;                              //读取的页数
 	var showNum = 10;                               //展现的页数
 	$scope.loading = 0;						//判断是否正在读取内容的变量
 	
@@ -144,8 +147,8 @@
 			$scope.posts.push($scope.readPosts[i]);
 		}
 		if (readNum < 1000) {
-			showNum=readNum;
-			readNum=readNum*5;
+			showNum=readNum*4;
+			readNum=readNum*20;
 		}
 		fillContent();
 	}
@@ -229,6 +232,10 @@
 	  $scope.gethotPosts = function() {
 	  	var Post = AV.Object.extend("Post");
 	  	var query = new AV.Query(Post);
+	  	var now = new Date();
+			var date = new Date(((now.getTime() - 3 * 24 * 3600 * 1000)/(24*3600*1000)) *24*3600*1000);
+			query.notEqualTo("doc_type", "test");
+	  	query.greaterThan("time", date);
 	  	query.descending("click");
 	  	query.limit(6);
 	  	query.find({
@@ -313,7 +320,7 @@
 		}
 	  }
 	  
-	var readNum = 100;                              //读取的页数
+	var readNum = 50;                              //读取的页数
 	var showNum = 10;                               //展现的页数
 	$scope.loading = 0;						//判断是否正在读取内容的变量
 	
@@ -341,8 +348,8 @@
 			$scope.posts.push($scope.readPosts[i]);
 		}
 		if (readNum < 1000) {
-			showNum=readNum;
-			readNum=readNum*5;
+			showNum=readNum*4;
+			readNum=readNum*20;
 		}
 		fillContent();
 	}
@@ -352,6 +359,7 @@
 	$scope.getPosts = function() {
 	  	var Post = AV.Object.extend("Post");
 	  	var query = new AV.Query(Post);
+	  	query.notEqualTo("doc_type", "test");
 	  	query.limit(readNum);
 	  	query.descending("time");
 	  	query.find({
@@ -380,6 +388,7 @@
 		//请求内容          
 		var Post = AV.Object.extend("Post");
 		var query = new AV.Query(Post);
+		query.notEqualTo("doc_type", "test");
 		query.descending("time");
 		query.skip($scope.readPosts.length);
 		query.limit(readNum);
@@ -426,7 +435,11 @@
 	  $scope.gethotPosts = function() {
 	  	var Post = AV.Object.extend("Post");
 	  	var query = new AV.Query(Post);
-		query.equalTo("doc_type", "buy");
+	  	var now = new Date();
+			var date = new Date(((now.getTime() - 3 * 24 * 3600 * 1000)/(24*3600*1000)) *24*3600*1000);
+	  	query.greaterThan("time", date);
+			query.equalTo("doc_type", "buy");
+
 	  	query.descending("click");
 	  	query.limit(6);
 	  	query.find({
@@ -511,7 +524,7 @@
 	  	});
 		}
 	  }
-	var readNum = 100;                              //读取的页数
+	var readNum = 50;                              //读取的页数
 	var showNum = 10;                               //展现的页数
 	$scope.loading = 0;						//判断是否正在读取内容的变量
 	
@@ -539,8 +552,8 @@
 			$scope.posts.push($scope.readPosts[i]);
 		}
 		if (readNum < 1000) {
-			showNum=readNum;
-			readNum=readNum*5;
+			showNum=readNum*4;
+			readNum=readNum*20;
 		}
 		fillContent();
 	}
@@ -550,7 +563,7 @@
 	$scope.getPosts = function() {
 	  	var Post = AV.Object.extend("Post");
 	  	var query = new AV.Query(Post);
-		query.equalTo("doc_type", "buy");
+			query.equalTo("doc_type", "buy");
 	  	query.limit(readNum);
 	  	query.descending("time");
 	  	query.find({
@@ -626,6 +639,9 @@
 	  $scope.gethotPosts = function() {
 	  	var Post = AV.Object.extend("Post");
 	  	var query = new AV.Query(Post);
+	  	var now = new Date();
+			var date = new Date(((now.getTime() - 3 * 24 * 3600 * 1000)/(24*3600*1000)) *24*3600*1000);
+	  	query.greaterThan("time", date);
 		query.equalTo("doc_type", "news");
 	  	query.descending("click");
 	  	query.limit(6);
@@ -712,7 +728,7 @@
 		}
 	  }
 	  
-	var readNum = 100;                              //读取的页数
+	var readNum = 50;                              //读取的页数
 	var showNum = 10;                               //展现的页数
 	$scope.loading = 0;						//判断是否正在读取内容的变量
 	
@@ -740,8 +756,8 @@
 			$scope.posts.push($scope.readPosts[i]);
 		}
 		if (readNum < 1000) {
-			showNum=readNum;
-			readNum=readNum*5;
+			showNum=readNum*4;
+			readNum=readNum*20;
 		}
 		fillContent();
 	}
@@ -926,6 +942,9 @@
 	  $scope.gethotPosts = function() {
 	  	var Post = AV.Object.extend("Post");
 	  	var query = new AV.Query(Post);
+	  	var now = new Date();
+			var date = new Date(((now.getTime() - 3 * 24 * 3600 * 1000)/(24*3600*1000)) *24*3600*1000);
+	  	query.greaterThan("time", date);
 	  	query.descending("click");
 	  	query.limit(6);
 	  	query.find({
